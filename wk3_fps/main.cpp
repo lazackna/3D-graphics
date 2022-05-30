@@ -23,7 +23,8 @@ ObjModel* model;
 int width, height, bpp;
 int mapWidth, mapHeight, mapbpp;
 GLuint textureId;
-stbi_uc * imgData, * mapImgData;
+
+std::vector<GameObject*> gameobjects;
 
 ObjModel* steve;
 glm::mat4 steve1Mat(1.0f);
@@ -117,53 +118,37 @@ void init()
     steve3Mat = glm::scale(steve1Mat, glm::vec3(0.05f, 0.05f, 0.05f));
     steve3Mat = glm::translate(steve1Mat, glm::vec3(10, 2, 10));
     ground = new ObjModel("models/world/ground/ground.obj");
-    testObject = (MovableGameObject*)GameObjectFactory::getGameObject("MovableGameObject");
-    spinningObject = (SpinningGameObject*)GameObjectFactory::getGameObject("SpinningGameObject");
-
+    GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
+    GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
+    gameobjects.push_back( testObject);
+    gameobjects.push_back( spinningObject);
     
     testObject->model = new ObjModel("models/steve/Steve.obj");
     spinningObject->model = testObject->model;
     //loadAtlas();
     tigl::shader->enableLighting(true);
-    
+    //tigl::shader->enableColorMult(false);
     tigl::shader->setLightCount(1);
-    tigl::shader->setLightDirectional(0, false);
-    tigl::shader->setLightPosition(0, {0,5,0});
-    tigl::shader->setLightDiffuse(0, { 255,140,130 });
-    //initMap();
-}
+    tigl::shader->setLightDirectional(0, true);
+    tigl::shader->setLightPosition(0, {0,20,0});
+    tigl::shader->setLightDiffuse(0, { 0,1,0 });
+    /*tigl::shader->setLightAmbient(0, { 100,146,0 });
+    tigl::shader->setLightSpecular(0, { 0,100,20 });*/
 
-//void initMap() {
-//    for (int x = 0; x < 20; x++)
-//    {
-//        for (int y = 0; y < 10; y++)
-//        {
-//            for (int z = 0; z < 20; z++)
-//            {
-//                if (y < 5) {
-//                    map[x][y][z] = 1;
-//                }
-//                else if (y == 5) {
-//                    map[x][y][z] = 2;
-//                }
-//                else {
-//                    map[x][y][z] = -1;
-//                }
-//            }
-//        }
-//    }
-//}
+    
+}
 
 void update(double deltatime)
 {
-    camera->update(window);
-    rotation += 0.5 * deltaTime;
+    camera->update(deltatime);
+    rotation += 0.5 * deltatime;
     if (rotation > 360) rotation = 0;
     steve2Y += steve2YMove * deltatime;
     if (steve2Y > 10) steve2YMove = -steve2YMove;
     if (steve2Y < 6) steve2YMove = -steve2YMove;
-    testObject->update(deltaTime);
-    spinningObject->update(deltatime);
+   
+
+    for (auto& object : gameobjects) object->update(deltaTime);
 }
 
 void draw()
@@ -173,68 +158,22 @@ void draw()
     
     int viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
+    glEnable(GL_DEPTH_TEST);
     glm::mat4 projection = glm::perspective(glm::radians(75.0f), viewport[2] / (float)viewport[3], 0.01f, 100.0f);
 
     tigl::shader->setProjectionMatrix(projection);
     tigl::shader->setViewMatrix(camera->getMatrix());
     tigl::shader->setModelMatrix(glm::mat4(1.0f));
     
-
-   // tigl::shader->enableColor(true);
-    tigl::shader->enableTexture(true);
-   // tigl::shader->enableColor(true);
-    
-    //tigl::shader->enableLighting(true);
-    
-
-
-    glEnable(GL_DEPTH_TEST);
-    //drawMap();
-    //steve1Mat = glm::scale(steve1Mat, glm::vec3(0.1f, 0.1f, 0.1f));
-   // rotateDegrees(steve1Mat, glm::vec3(0,rotation,0));
-   // steve1Mat = glm::scale(steve1Mat, glm::vec3(0.1f, 0.1f, 0.1f));
-   // tigl::shader->setModelMatrix(steve1Mat);
-   // //steve->draw();
-
-    glm::mat4 mat(1.0f);
-   //// mat = glm::scale(mat, glm::vec3(0.1f, 0.1f, 0.1f));
-   // steve2Mat += glm::translate(mat, glm::vec3(0, steve2Y, 0));
-   // steve2Mat = glm::scale(steve2Mat, glm::vec3(0.1f, 0.1f, 0.1f));
-   // tigl::shader->setModelMatrix(steve2Mat);
-   // //steve->draw();
-
-   // rotateDegrees(steve3Mat, glm::vec3(rotation, rotation, rotation));
-   // steve3Mat = glm::scale(steve3Mat, glm::vec3(0.1f, 0.1f, 0.1f));
-   // tigl::shader->setModelMatrix(steve3Mat);
-   // //steve->draw();
-
-   // mat = glm::mat4(1.0f);
-   // mat = glm::scale(mat, { 0.1, 0.1, 0.1 });
-   // mat = glm::translate(mat, { 0, -10, 0 });
-   // tigl::shader->setModelMatrix(mat);
-   // ground->draw();
-    
-    tigl::shader->enableTexture(true);
+    tigl::shader->enableTexture(false);
     tigl::shader->enableLighting(true);
-    mat = glm::mat4(1.0f);
+    glm::mat4 mat = glm::mat4(1.0f);
     mat = glm::translate(mat, { 1,0,0 });
     tigl::shader->setModelMatrix(mat);
     
     createCube();
-    /*tigl::shader->enableLighting(false);
-    tigl::shader->setModelMatrix(glm::mat4(1.0f));
-    testObject->draw();
-    spinningObject->draw();*/
-    //createCube();
-    //for (int i = 0; i < horizontalItems * verticalItems; i++) {
-    //    glm::mat4 mat(1.0f);
-    //    
-    //    mat = glm::translate(mat , glm::vec3(i, 0, 0));
-    //   // mat = glm::scale(mat, glm::vec3(0.5, 0.5, 0.5));
-    //    tigl::shader->setModelMatrix(mat);
-
-    //    drawCube(i);
-    //}
+    
+    for (auto& object : gameobjects) object->draw();
    
 }
 
@@ -258,24 +197,24 @@ void draw()
 //    }
 //}
 
-void loadAtlas() {
-    glGenTextures(1, &textureId);
-    glBindTexture(GL_TEXTURE_2D, textureId);
-    imgData = stbi_load("Atlas.png", &width, &height, &bpp, 4);
-
-    glTexImage2D(GL_TEXTURE_2D,
-        0,
-        GL_RGBA,
-        width,
-        height,
-        0,
-        GL_RGBA,
-        GL_UNSIGNED_BYTE,
-        imgData);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    stbi_image_free(imgData);
-}
+//void loadAtlas() {
+//    glGenTextures(1, &textureId);
+//    glBindTexture(GL_TEXTURE_2D, textureId);
+//    imgData = stbi_load("Atlas.png", &width, &height, &bpp, 4);
+//
+//    glTexImage2D(GL_TEXTURE_2D,
+//        0,
+//        GL_RGBA,
+//        width,
+//        height,
+//        0,
+//        GL_RGBA,
+//        GL_UNSIGNED_BYTE,
+//        imgData);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//    stbi_image_free(imgData);
+//}
 
 void drawCube(int index) {
     if (index < 0) return;

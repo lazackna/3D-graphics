@@ -2,11 +2,13 @@
 #include <GLFW/glfw3.h>
 #include <glm/gtc/matrix_transform.hpp>
 
-FpsCam::FpsCam(GLFWwindow* window)
+FpsCam::FpsCam(GLFWwindow* _window)
 {
+	window = _window;
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	if (glfwRawMouseMotionSupported())
 		glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+
 }
 
 
@@ -19,14 +21,14 @@ glm::mat4 FpsCam::getMatrix()
 	return ret;
 }
 
-void FpsCam::move(float angle, float fac)
+void FpsCam::move(float angle, float fac, float deltatime)
 {
-	position.x += (float)cos(rotation.y + glm::radians(angle)) * fac;
-	position.z += (float)sin(rotation.y + glm::radians(angle)) * fac;
+	position.x += ((float)cos(rotation.y + glm::radians(angle)) * fac) * deltatime / 100;
+	position.z += ((float)sin(rotation.y + glm::radians(angle)) * fac) * deltatime / 100;
 }
 
 
-void FpsCam::update(GLFWwindow* window)
+void FpsCam::update(float deltatime)
 {
 	double x, y;
 	glfwGetCursorPos(window, &x, &y);
@@ -42,11 +44,11 @@ void FpsCam::update(GLFWwindow* window)
 
 
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		move(0, 0.05f);
+		move(0, 0.05f, deltatime);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		move(180, 0.05f);
+		move(180, 0.05f, deltatime);
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		move(90, 0.05f);
+		move(90, 0.05f, deltatime);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		move(-90, 0.05f);
+		move(-90, 0.05f, deltatime);
 }
