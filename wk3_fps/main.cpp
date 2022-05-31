@@ -26,21 +26,6 @@ GLuint textureId;
 
 std::vector<GameObject*> gameobjects;
 
-ObjModel* steve;
-glm::mat4 steve1Mat(1.0f);
-glm::mat4 steve2Mat(1.0f);
-double steve2Y = 0;
-double steve2YMove = 0.5;
-glm::mat4 steve3Mat(1.0f);
-int rotation = 0;
-int horizontalItems = 16;
-int verticalItems = 16;
-
-MovableGameObject* testObject;
-SpinningGameObject* spinningObject;
-
-ObjModel* ground;
-
 double lastTime, deltaTime;
 
 int map[20][10][20];
@@ -53,6 +38,7 @@ void draw();
 void loadAtlas();
 void drawCube(int index);
 void createCube();
+void createGround();
 void createCubeWithTexture(int xb, int yb, int sizeX, int sizeY);
 void rotateDegrees(glm::mat4& model, const glm::vec3 rotation);
 
@@ -107,21 +93,14 @@ void init()
     });
     
     camera = new FpsCam(window);
-    
-    steve = new ObjModel("models/steve/Steve.obj");
-    steve1Mat = glm::scale(steve1Mat, glm::vec3(0.05f, 0.05f, 0.05f));
-    steve1Mat = glm::translate(steve1Mat, glm::vec3(0, 0, 0));
 
-    steve2Mat = glm::scale(steve1Mat, glm::vec3(0.05f, 0.05f, 0.05f));
-    steve2Mat = glm::translate(steve1Mat, glm::vec3(2, 0, 2));
+    createGround();
 
-    steve3Mat = glm::scale(steve1Mat, glm::vec3(0.05f, 0.05f, 0.05f));
-    steve3Mat = glm::translate(steve1Mat, glm::vec3(10, 2, 10));
-    ground = new ObjModel("models/world/ground/ground.obj");
     GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
     GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
     gameobjects.push_back( testObject);
     gameobjects.push_back( spinningObject);
+    
     
     testObject->model = new ObjModel("models/steve/Steve.obj");
     spinningObject->model = testObject->model;
@@ -131,7 +110,7 @@ void init()
     tigl::shader->setLightCount(1);
     tigl::shader->setLightDirectional(0, true);
     tigl::shader->setLightPosition(0, {0,20,0});
-    tigl::shader->setLightDiffuse(0, { 0,1,0 });
+    tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
     /*tigl::shader->setLightAmbient(0, { 100,146,0 });
     tigl::shader->setLightSpecular(0, { 0,100,20 });*/
 
@@ -140,13 +119,7 @@ void init()
 
 void update(double deltatime)
 {
-    camera->update(deltatime);
-    rotation += 0.5 * deltatime;
-    if (rotation > 360) rotation = 0;
-    steve2Y += steve2YMove * deltatime;
-    if (steve2Y > 10) steve2YMove = -steve2YMove;
-    if (steve2Y < 6) steve2YMove = -steve2YMove;
-   
+    camera->update(deltatime);   
 
     for (auto& object : gameobjects) object->update(deltaTime);
 }
@@ -170,11 +143,28 @@ void draw()
     glm::mat4 mat = glm::mat4(1.0f);
     mat = glm::translate(mat, { 1,0,0 });
     tigl::shader->setModelMatrix(mat);
-    
+    tigl::shader->setLightDirectional(0, true);
+    tigl::shader->setLightPosition(0, { 1,20,0 });
+    tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
     createCube();
-    
+
     for (auto& object : gameobjects) object->draw();
    
+}
+
+void createGround() {
+    GameObject* groundObject = GameObjectFactory::getGameObject("GameObject");
+    groundObject->transform = glm::vec3(0, -1, 0);
+    groundObject->scale = glm::vec3(20, 1, 20);
+    groundObject->vertexes.push_back(Vertex::PCTN(glm::vec3(0.5, 0, -0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(1, 0), glm::vec3(0, 1, 0)));//
+    groundObject->vertexes.push_back(Vertex::PCTN(glm::vec3(-0.5, 0, -0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(0, 0), glm::vec3(0, 1, 0)));
+    groundObject->vertexes.push_back(Vertex::PCTN(glm::vec3(-0.5, 0, 0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(0, 1), glm::vec3(0, 1, 0)));//
+
+    groundObject->vertexes.push_back(Vertex::PCTN(glm::vec3(0.5, 0, -0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(1, 0), glm::vec3(0, 1, 0)));
+    groundObject->vertexes.push_back(Vertex::PCTN(glm::vec3(0.5, 0, 0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(1, 1), glm::vec3(0, 1, 0)));
+    groundObject->vertexes.push_back(Vertex::PCTN(glm::vec3(-0.5, 0, 0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(0, 1), glm::vec3(0, 1, 0)));
+    gameobjects.push_back(groundObject);
+
 }
 
 //void drawMap() {
@@ -216,93 +206,99 @@ void draw()
 //    stbi_image_free(imgData);
 //}
 
-void drawCube(int index) {
-    if (index < 0) return;
-    int x = index % horizontalItems;
-    int y = index / horizontalItems;
+//void drawCube(int index) {
+//    if (index < 0) return;
+//    int x = index % horizontalItems;
+//    int y = index / horizontalItems;
+//
+//    int atlasX = x * horizontalItems;
+//    int atlasY = y * verticalItems;
+//    int sizeX = width / horizontalItems;
+//    int sizeY = height / verticalItems;
+//    createCubeWithTexture(atlasX, atlasY, horizontalItems, verticalItems);
+//}
 
-    int atlasX = x * horizontalItems;
-    int atlasY = y * verticalItems;
-    int sizeX = width / horizontalItems;
-    int sizeY = height / verticalItems;
-    createCubeWithTexture(atlasX, atlasY, horizontalItems, verticalItems);
-}
-
-void createCubeWithTexture(int xb, int yb, int sizeX, int sizeY) {
-
-    // xb and yb = (0,0)
-    glm::vec2 botL(xb / (double)width, yb / (double)height);
-    glm::vec2 botR((xb + sizeX) / (double)width, yb / (double)height);
-    glm::vec2 topL(xb / (double)width, (yb + sizeY) / (double)height);
-    glm::vec2 topR((xb + sizeX) / (double)width, (yb + sizeY) / (double)height);
-
-    tigl::begin(GL_QUADS);
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), botR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), botL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), topL, glm::vec4(0.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), topR, glm::vec4(1.0, 1.0, 1.0, 1.0)));
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), botR, glm::vec4(1.0, 0.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), botL, glm::vec4(0.0, 0.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), botR, glm::vec4(1.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5),botL, glm::vec4(0.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), botR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), botL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), topL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), topR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), botR, glm::vec4(0.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), botL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), topR, glm::vec4(0.0, 0.0, 1.0, 1.0)));
-
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), botR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), botL, glm::vec4(1.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), topL, glm::vec4(1.0, 0.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-    tigl::end();
-}
+//void createCubeWithTexture(int xb, int yb, int sizeX, int sizeY) {
+//
+//    // xb and yb = (0,0)
+//    glm::vec2 botL(xb / (double)width, yb / (double)height);
+//    glm::vec2 botR((xb + sizeX) / (double)width, yb / (double)height);
+//    glm::vec2 topL(xb / (double)width, (yb + sizeY) / (double)height);
+//    glm::vec2 topR((xb + sizeX) / (double)width, (yb + sizeY) / (double)height);
+//
+//    tigl::begin(GL_QUADS);
+//
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), botR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), botL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), topL, glm::vec4(0.0, 1.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), topR, glm::vec4(1.0, 1.0, 1.0, 1.0)));
+//
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), botR, glm::vec4(1.0, 0.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), botL, glm::vec4(0.0, 0.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
+//
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), botR, glm::vec4(1.0, 1.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5),botL, glm::vec4(0.0, 1.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
+//
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), botR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), botL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), topL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), topR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
+//
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), botR, glm::vec4(0.0, 1.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), botL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), topR, glm::vec4(0.0, 0.0, 1.0, 1.0)));
+//
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), botR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), botL, glm::vec4(1.0, 1.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), topL, glm::vec4(1.0, 0.0, 1.0, 1.0)));
+//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
+//    tigl::end();
+//}
 
 void createCube() {
     
     tigl::begin(GL_QUADS);
     
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), glm::vec2(1,0), glm::vec4(1.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(0,0), glm::vec4(0.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(0, 1), glm::vec4(0.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), glm::vec2(1, 1), glm::vec4(1.0, 1.0, 1.0, 1.0)));
+    //top
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, 0.5, -0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(1, 0), glm::vec3(0, 1, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, 0.5, -0.5), glm::vec4(0.0, 1.0, 0.0, 1.0), glm::vec2(0, 0), glm::vec3(0, 1, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, 0.5, 0.5), glm::vec4(0.0, 1.0, 1.0, 1.0), glm::vec2(0, 1), glm::vec3(0, 1, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, 0.5, 0.5), glm::vec4(1.0, 1.0, 1.0, 1.0), glm::vec2(1, 1), glm::vec3(0, 1, 0)));
 
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), glm::vec2(1, 0), glm::vec4(1.0, 0.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), glm::vec2(0, 0), glm::vec4(0.0, 0.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), glm::vec2(0, 1), glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), glm::vec2(1, 1), glm::vec4(1.0, 0.0, 0.0, 1.0)));
+    //bottom
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, -0.5, 0.5), glm::vec4(1.0, 0.0, 1.0, 1.0), glm::vec2(1, 0), glm::vec3(0, -1, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, -0.5, 0.5), glm::vec4(0.0, 0.0, 1.0, 1.0), glm::vec2(0, 0), glm::vec3(0, -1, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, -0.5, -0.5), glm::vec4(0.0, 0.0, 0.0, 1.0), glm::vec2(0, 1), glm::vec3(0, -1, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, -0.5, -0.5), glm::vec4(1.0, 0.0, 0.0, 1.0), glm::vec2(1, 1), glm::vec3(0, -1, 0)));
 
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), glm::vec2(1, 0), glm::vec4(1.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(0, 0), glm::vec4(0.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), glm::vec2(0, 1), glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), glm::vec2(1, 1), glm::vec4(1.0, 0.0, 0.0, 1.0)));
+    //back
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, 0.5, 0.5), glm::vec4(1.0, 1.0, 1.0, 1.0), glm::vec2(1, 0), glm::vec3(0 ,0 ,-1)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, 0.5, 0.5), glm::vec4(0.0, 1.0, 1.0, 1.0), glm::vec2(0, 0), glm::vec3(0, 0, -1)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, -0.5, 0.5), glm::vec4(0.0, 0.0, 0.0, 1.0), glm::vec2(0, 1), glm::vec3(0, 0, -1)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, -0.5, 0.5), glm::vec4(1.0, 0.0, 0.0, 1.0), glm::vec2(1, 1), glm::vec3(0, 0, -1)));
 
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), glm::vec2(1, 0), glm::vec4(1.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), glm::vec2(0, 0), glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(0, 1), glm::vec4(0.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), glm::vec2(1, 1), glm::vec4(1.0, 1.0, 0.0, 1.0)));
+    //front
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, -0.5, -0.5), glm::vec4(1.0, 0.0, 0.0, 1.0), glm::vec2(1, 0), glm::vec3(0,0,1)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, -0.5, -0.5), glm::vec4(0.0, 0.0, 0.0, 1.0), glm::vec2(0, 0), glm::vec3(0, 0, 1)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, 0.5, -0.5), glm::vec4(0.0, 1.0, 0.0, 1.0), glm::vec2(0, 1), glm::vec3(0, 0, 1)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, 0.5, -0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(1, 1), glm::vec3(0, 0, 1)));
 
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), glm::vec2(1, 0), glm::vec4(0.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), glm::vec2(0, 0), glm::vec4(0.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), glm::vec2(0, 1), glm::vec4(0.0, 0.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), glm::vec2(1, 1), glm::vec4(0.0, 0.0, 1.0, 1.0)));
+    //left
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, 0.5, 0.5), glm::vec4(0.0, 1.0, 1.0, 1.0), glm::vec2(1, 0), glm::vec3(-1,0,0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, 0.5, -0.5), glm::vec4(0.0, 1.0, 0.0, 1.0), glm::vec2(0, 0), glm::vec3(-1, 0, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, -0.5, -0.5), glm::vec4(0.0, 0.0, 0.0, 1.0), glm::vec2(0, 1), glm::vec3(-1, 0, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(-0.5, -0.5, 0.5), glm::vec4(0.0, 0.0, 1.0, 1.0), glm::vec2(1, 1), glm::vec3(-1, 0, 0)));
 
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), glm::vec2(1, 0), glm::vec4(1.0, 1.0, 0.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), glm::vec2(0, 0), glm::vec4(1.0, 1.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), glm::vec2(0, 1), glm::vec4(1.0, 0.0, 1.0, 1.0)));
-    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), glm::vec2(1, 1), glm::vec4(1.0, 0.0, 0.0, 1.0)));
+    //right
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, 0.5, -0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(1, 0), glm::vec3(1,0,0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, 0.5, 0.5), glm::vec4(1.0, 1.0, 1.0, 1.0), glm::vec2(0, 0), glm::vec3(1, 0, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, -0.5, 0.5), glm::vec4(1.0, 0.0, 1.0, 1.0), glm::vec2(0, 1), glm::vec3(1, 0, 0)));
+    tigl::addVertex(Vertex::PCTN(glm::vec3(0.5, -0.5, -0.5), glm::vec4(1.0, 0.0, 0.0, 1.0), glm::vec2(1, 1), glm::vec3(1, 0, 0)));
     tigl::end();
 }
 

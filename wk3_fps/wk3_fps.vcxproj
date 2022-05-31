@@ -163,6 +163,7 @@
     </ClCompile>
     <ClCompile Include="MovableGameObject.cpp" />
     <ClCompile Include="ObjModel.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpinningGameObject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="tigl.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="GameObjectFactory.h" />
     <ClInclude Include="MovableGameObject.h" />
     <ClInclude Include="ObjModel.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpinningGameObject.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tigl.h" />
