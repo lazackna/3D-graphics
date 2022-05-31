@@ -92,7 +92,7 @@ ObjModel::ObjModel(const std::string &fileName)
 	if(fileName == dirName)
 		dirName = "";
 
-
+	modelName = fileName;
 	std::ifstream pFile(fileName.c_str());
 
 	if (!pFile.is_open())

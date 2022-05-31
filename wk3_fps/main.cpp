@@ -11,6 +11,7 @@
 #include "ObjModel.h"
 #include "WindowSingleton.h"
 #include "GameObjectFactory.h"
+#include "SceneManager.h"
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
@@ -47,7 +48,8 @@ int main(void)
     if (!glfwInit())
         throw "Could not initialize glwf";
     int count;
-
+    SceneManager s = SceneManager();
+    
     WindowSingleton::getInstance().window = glfwCreateWindow(1000, 800, "Hello World", NULL, NULL);
     window = WindowSingleton::getInstance().window;
     if (!window)
@@ -61,7 +63,7 @@ int main(void)
     tigl::init();
     
     init();
-
+    s.load("test", gameobjects);
     while (!glfwWindowShouldClose(window))
     {
         double nowTime = glfwGetTime();
@@ -72,7 +74,7 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
+    s.save("test", gameobjects);
 	glfwTerminate();
 
     return 0;
@@ -96,14 +98,14 @@ void init()
 
     createGround();
 
-    GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
+   /* GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
     GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
     gameobjects.push_back( testObject);
     gameobjects.push_back( spinningObject);
     
     
     testObject->model = new ObjModel("models/steve/Steve.obj");
-    spinningObject->model = testObject->model;
+    spinningObject->model = testObject->model;*/
     //loadAtlas();
     tigl::shader->enableLighting(true);
     //tigl::shader->enableColorMult(false);
@@ -140,13 +142,13 @@ void draw()
     
     tigl::shader->enableTexture(false);
     tigl::shader->enableLighting(true);
-    glm::mat4 mat = glm::mat4(1.0f);
+    /*glm::mat4 mat = glm::mat4(1.0f);
     mat = glm::translate(mat, { 1,0,0 });
     tigl::shader->setModelMatrix(mat);
     tigl::shader->setLightDirectional(0, true);
     tigl::shader->setLightPosition(0, { 1,20,0 });
-    tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
-    createCube();
+    tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });*/
+   // createCube();
 
     for (auto& object : gameobjects) object->draw();
    

@@ -178,6 +178,7 @@
     <ClInclude Include="SpinningGameObject.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tigl.h" />
+    <ClInclude Include="util.h" />
     <ClInclude Include="WindowSingleton.h" />
   </ItemGroup>
   <ItemGroup>

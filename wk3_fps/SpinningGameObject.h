@@ -2,7 +2,7 @@
 #include "GameObject.h"
 class SpinningGameObject : public GameObject
 {
-private:
+public:
 	glm::vec3 spin;
 public:
 	SpinningGameObject(glm::vec3 _spin) : GameObject(), spin(_spin) {}

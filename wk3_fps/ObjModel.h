@@ -57,6 +57,8 @@ private:
 
 private:
 	std::map<MaterialInfo *, std::vector<tigl::Vertex>> drawMap;
+public:
+	std::string modelName;
 
 public:
 	ObjModel(const std::string &filename);
