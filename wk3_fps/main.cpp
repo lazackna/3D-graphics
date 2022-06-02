@@ -100,6 +100,8 @@ void init()
 
    /* GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
     GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
+    spinningObject->scale = glm::vec3(0.2, 0.2, 0.2);
+    spinningObject->transform = glm::vec3(0, -3, 0);
     gameobjects.push_back( testObject);
     gameobjects.push_back( spinningObject);
     
@@ -110,11 +112,12 @@ void init()
     tigl::shader->enableLighting(true);
     //tigl::shader->enableColorMult(false);
     tigl::shader->setLightCount(1);
-    tigl::shader->setLightDirectional(0, true);
-    tigl::shader->setLightPosition(0, {0,20,0});
+    tigl::shader->setLightDirectional(0, false);
+ 
+    tigl::shader->setLightPosition(0, {0,0,0});
     tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
-    /*tigl::shader->setLightAmbient(0, { 100,146,0 });
-    tigl::shader->setLightSpecular(0, { 0,100,20 });*/
+    tigl::shader->setLightAmbient(0, { 0.5f, 0.5f, 0.5f });
+    /*tigl::shader->setLightSpecular(0, {0,100,20}); */
 
     
 }
