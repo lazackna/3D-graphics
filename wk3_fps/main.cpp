@@ -97,7 +97,11 @@ void init()
     createGround();
 
     GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
+    testObject->scale = glm::vec3(0.2, 0.2, 0.2);
+    testObject->transform = glm::vec3(1, -3, 0);
     GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
+    spinningObject->scale = glm::vec3(0.2, 0.2, 0.2);
+    spinningObject->transform = glm::vec3(0, -3, 0);
     gameobjects.push_back( testObject);
     gameobjects.push_back( spinningObject);
     
@@ -108,11 +112,12 @@ void init()
     tigl::shader->enableLighting(true);
     //tigl::shader->enableColorMult(false);
     tigl::shader->setLightCount(1);
-    tigl::shader->setLightDirectional(0, true);
-    tigl::shader->setLightPosition(0, {0,20,0});
+    tigl::shader->setLightDirectional(0, false);
+ 
+    tigl::shader->setLightPosition(0, {0,0,0});
     tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
-    /*tigl::shader->setLightAmbient(0, { 100,146,0 });
-    tigl::shader->setLightSpecular(0, { 0,100,20 });*/
+    tigl::shader->setLightAmbient(0, { 0.5f, 0.5f, 0.5f });
+    /*tigl::shader->setLightSpecular(0, {0,100,20}); */
 
     
 }
@@ -141,11 +146,11 @@ void draw()
     tigl::shader->enableTexture(false);
     tigl::shader->enableLighting(true);
     glm::mat4 mat = glm::mat4(1.0f);
-    mat = glm::translate(mat, { 1,0,0 });
+    mat = glm::translate(mat, { 0,0,3 });
     tigl::shader->setModelMatrix(mat);
-    tigl::shader->setLightDirectional(0, true);
-    tigl::shader->setLightPosition(0, { 1,20,0 });
-    tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
+    //tigl::shader->setLightDirectional(0, true);
+    //tigl::shader->setLightPosition(0, { 3,20,3 });
+    //tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
     createCube();
 
     for (auto& object : gameobjects) object->draw();
