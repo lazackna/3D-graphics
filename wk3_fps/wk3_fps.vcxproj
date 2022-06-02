@@ -172,9 +172,11 @@
     <ClInclude Include="FpsCam.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectFactory.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="MovableGameObject.h" />
     <ClInclude Include="ObjModel.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SerializationEnabler.h" />
     <ClInclude Include="SpinningGameObject.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tigl.h" />

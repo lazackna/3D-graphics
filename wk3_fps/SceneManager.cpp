@@ -1,26 +1,10 @@
 #include "SceneManager.h"
 #include <fstream>
 #include <iostream>
-#include "util.h"
+//#include "util.h"
 
-static inline std::string createVertexString(GameObject* o) {
-	std::string output = "[";
-	for (int i = 0; i < o->vertexes.size(); i++) {
-		tigl::Vertex v = o->vertexes[i];
-		// Need to add tigl::vertex to string
-		std::string data = reinterpret_cast<char*>(&v);
-		output.append(data);
-		if (i != o->vertexes.size() - 1) {
-			output.append(",");
-		}
-	}
-	output.append("]");
-	return output;
-}
-
-static inline std::vector<tigl::Vertex> vertexStringToVector(std::string vertexData) {
-	//return reinterpret_cast<std::vector<tigl::Vertex>>(vertexData);
-}
+#include "SerializationEnabler.h"
+using json = nlohmann::json;
 
 bool SceneManager::save(std::string sceneName, std::vector<GameObject*> gameobjects) {
 	std::cout << "Loading " << sceneName << std::endl;
@@ -32,39 +16,55 @@ bool SceneManager::save(std::string sceneName, std::vector<GameObject*> gameobje
 	if (sceneName == dirName)
 		dirName = "";
 
-	std::ofstream output(dirName + "/" + sceneName);
+	std::ofstream output(dirName + "/" + sceneName + ".scene");
 
 	if (!output.is_open()) {
 		std::cout << "Failed to create a save file!" << std::endl;
 		return false;
 	}
 
-	std::string s;
+	json j;
+	std::string garbageDump;
+	std::vector<json> jsonObjectArray;
 	for (int i = 0; i < gameobjects.size(); i++) {
+		json object;
+		json extraData;
 		GameObject* o = gameobjects[i];
 		std::string typeName = typeid(*o).name();
-		
-		typeName.replace(0, 6, s);
-		if (i == 0)
-			output << "type:" << typeName;
-		else
-			output << std::endl << "type:" << typeName;
+		typeName.replace(0, 6, garbageDump);
+		object["type"] = typeName;
+		//if (i == 0)
+		//	output << "type:" << typeName;
+		//else
+		//	output << std::endl << "type:" << typeName;
 		if (o->model) {
-			output << std::endl << "model:" << o->model->modelName;
+			//output << std::endl << "model:" << o->model->modelName;
+			object["model"] = o->model->modelName;
 		}
 		else {
-			output << std::endl << "vertexes:" << createVertexString(o);
+			//output << std::endl << "vertexes:" << createVertexString(o);
+			object["vertexes"] = o->vertexes;
 		}
+		//
+		////add transform, rotation, scale
+		//output << std::endl << "transform:" << o->transform[0] << ',' << o->transform[1] << ',' << o->transform[2];
+		//output << std::endl << "rotation:" << o->rotation[0] << ',' << o->rotation[1] << ',' << o->rotation[2];
+		//output << std::endl << "scale:" << o->scale[0] << ',' << o->scale[1] << ',' << o->scale[2];
+		object["transform"] = o->transform;
+		object["rotation"] = o->rotation;
+		object["scale"] = o->scale;
 		
-		//add transform, rotation, scale
-		output << std::endl << "transform:" << o->transform[0] << ',' << o->transform[1] << ',' << o->transform[2];
-		output << std::endl << "rotation:" << o->rotation[0] << ',' << o->rotation[1] << ',' << o->rotation[2];
-		output << std::endl << "scale:" << o->scale[0] << ',' << o->scale[1] << ',' << o->scale[2];
 		if (SpinningGameObject* so = dynamic_cast<SpinningGameObject*>(o)) {
-			output << std::endl << "spin:" << so->spin[0] << ',' << so->spin[1] << ',' << so->spin[2];
+		//	output << std::endl << "spin:" << so->spin[0] << ',' << so->spin[1] << ',' << so->spin[2];
+			extraData["spin"] = so->spin;
+
 		}
+		object["extradata"] = extraData;
+		jsonObjectArray.push_back(object);
 	}
 	
+	j["gameobjects"] = jsonObjectArray;
+	output << j.dump();
 	output.close();
 	return true;
 }
@@ -80,75 +80,35 @@ bool SceneManager::load(std::string sceneName, std::vector<GameObject*>& gameobj
 	if (sceneName == dirName)
 		dirName = "";
 
-	std::ifstream input("scenes/" + sceneName);
+	std::ifstream input("scenes/" + sceneName + ".scene");
 	if (!input.is_open()) {
-		std::cout << "Failed to create a save file!" << std::endl;
+		std::cout << "Could not find save file!" << std::endl;
 		return false;
 	}
-	bool firstObject = false;
-	bool newObject = false;
-	/*if (!input.eof()) {
-		std::string firstType;
-		std::getline(input, firstType);
-		if (split(firstType, ":")[0]._Equal("type")) {
-			
-		}
-	}*/
-	std::string currentType, model, transform, rotation, scale;
-	std::vector<std::string> extraData;
 	
-	while (!input.eof()) {
-		
-		std::string line;
-		std::getline(input,line);
-		if (line.empty()) return false;
-		std::vector<std::string> values = split(line, ":");
+	json extradata;
 
-		if (values[0]._Equal("type")) {
-			if (!firstObject) { 
-				firstObject = true; 
-				currentType = values[1];
-			}
-			else newObject = true;
-			
-		} else if (values[0]._Equal("model")) {
-			model = values[1];
-		} else if (values[0]._Equal("transform")) {
-			transform = values[1];
-		} else if (values[0]._Equal("rotation")) {
-			rotation = values[1];
-		} else if (values[0]._Equal("scale")) {
-			scale = values[1];
-		} else {
-			extraData.push_back(values[1]);
-		}
+	json j = json::parse(input);
+	
+	json objects = j["gameobjects"];
 
-		if (newObject) {
-			GameObject* object = GameObjectFactory::getGameObject(currentType, extraData);
-			if (!model.empty()) object->model = new ObjModel(model);
-			object->transform = stringToVec3(transform);
-			object->rotation = stringToVec3(rotation);
-			object->scale = stringToVec3(scale);
-			
-			gameobjects.push_back(object);
-			
-			currentType = values[1];
-			model = "";
-			transform = "";
-			rotation = "";
-			scale = "";
-			newObject = false;
+	for (int i = 0; i < objects.size(); i++) {
+		json object = objects[i];
+
+		std::string type = object["type"];
+
+		GameObject* gameobject = GameObjectFactory::getGameObject(object["type"], object["extradata"]);
+		if (object.contains("model")) {
+			gameobject->model = new ObjModel(object["model"]);
 		}
-		
+		else {
+			gameobject->vertexes = object["vertexes"];
+		}
+		gameobject->transform = object["transform"];
+		gameobject->rotation = object["rotation"];
+		gameobject->scale = object["scale"];
+
+		gameobjects.push_back(gameobject);
 	}
-	GameObject* object = GameObjectFactory::getGameObject(currentType, extraData);
-	if (!model.empty()) object->model = new ObjModel(model);
-	object->transform = stringToVec3(transform);
-	object->rotation = stringToVec3(rotation);
-	object->scale = stringToVec3(scale);
-
-	gameobjects.push_back(object);
-
-
-	return false;
+	return true;
 }

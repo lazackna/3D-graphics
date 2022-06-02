@@ -10,14 +10,14 @@
 #include "stb_image.h"
 #include "ObjModel.h"
 #include "WindowSingleton.h"
-#include "GameObjectFactory.h"
+//#include "SerializationEnabler.h"
+//#include "GameObjectFactory.h"
 #include "SceneManager.h"
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "glew32s.lib")
 #pragma comment(lib, "opengl32.lib")
-
 
 GLFWwindow* window;
 ObjModel* model;
@@ -74,7 +74,7 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    s.save("test", gameobjects);
+   // s.save("test", gameobjects);
 	glfwTerminate();
 
     return 0;
@@ -96,19 +96,20 @@ void init()
     
     camera = new FpsCam(window);
 
-    createGround();
+    //createGround();
 
-   /* GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
-    GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
-    spinningObject->scale = glm::vec3(0.2, 0.2, 0.2);
-    spinningObject->transform = glm::vec3(0, -3, 0);
-    gameobjects.push_back( testObject);
-    gameobjects.push_back( spinningObject);
-    
-    
-    testObject->model = new ObjModel("models/steve/Steve.obj");
-    spinningObject->model = testObject->model;*/
-    //loadAtlas();
+    //GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
+    //GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
+    //spinningObject->scale = glm::vec3(0.2, 0.2, 0.2);
+    //spinningObject->transform = glm::vec3(0, -3, 0);
+    //gameobjects.push_back( testObject);
+    //gameobjects.push_back( spinningObject);
+    //
+    //
+    //testObject->model = new ObjModel("models/steve/Steve.obj");
+    //spinningObject->model = testObject->model;
+    ////loadAtlas();
+
     tigl::shader->enableLighting(true);
     //tigl::shader->enableColorMult(false);
     tigl::shader->setLightCount(1);

@@ -1,6 +1,6 @@
 #include "GameObjectFactory.h"
-#include "util.h"
-
+//#include "SerializationEnabler.h"
+#include "json.hpp"
 GameObject * GameObjectFactory::getGameObject(std::string type) {
 	if (type._Equal("GameObject")) { 
 		return new GameObject(); 
@@ -15,7 +15,8 @@ GameObject * GameObjectFactory::getGameObject(std::string type) {
 	return nullptr;
 }
 
-GameObject* GameObjectFactory::getGameObject(std::string type, std::vector<std::string> extraData) {
+GameObject* GameObjectFactory::getGameObject(std::string type, nlohmann::json extradata) {
+	nlohmann::json j = extradata;
 	if (type._Equal("GameObject")) {
 		return new GameObject();
 	}
@@ -23,8 +24,9 @@ GameObject* GameObjectFactory::getGameObject(std::string type, std::vector<std::
 		return new MovableGameObject();
 	}
 	else if (type._Equal("SpinningGameObject")) {
-		std::vector<std::string> values = split(extraData[0], ",");
-		return new SpinningGameObject(glm::vec3(std::stof(values[0]), std::stof(values[1]), std::stof(values[2])));
+		std::vector<float> spin = j["spin"];
+	
+		return new SpinningGameObject(glm::vec3(spin[0], spin[1], spin[2]));
 	}
 
 	return nullptr;

@@ -1,5 +1,5 @@
 #pragma once
-//#include "GameObject.h"
+#include "json.hpp"
 #include "MovableGameObject.h"
 #include "SpinningGameObject.h"
 
@@ -8,6 +8,6 @@ class GameObjectFactory
 public:
 	
 	static GameObject * getGameObject(std::string type);
-	static GameObject* getGameObject(std::string type, std::vector<std::string> extraData);
+	static GameObject* getGameObject(std::string type, nlohmann::json extradata);
 };
 
