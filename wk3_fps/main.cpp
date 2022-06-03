@@ -26,6 +26,7 @@ int mapWidth, mapHeight, mapbpp;
 GLuint textureId;
 
 std::vector<GameObject*> gameobjects;
+bool enableFog = false;
 
 double lastTime, deltaTime;
 
@@ -74,7 +75,7 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-   // s.save("test", gameobjects);
+    s.save("test", gameobjects);
 	glfwTerminate();
 
     return 0;
@@ -96,35 +97,31 @@ void init()
     
     camera = new FpsCam(window);
 
-    //createGround();
-
-    //GameObject* testObject = GameObjectFactory::getGameObject("MovableGameObject");
-    //GameObject* spinningObject = GameObjectFactory::getGameObject("SpinningGameObject");
-    //spinningObject->scale = glm::vec3(0.2, 0.2, 0.2);
-    //spinningObject->transform = glm::vec3(0, -3, 0);
-    //gameobjects.push_back( testObject);
-    //gameobjects.push_back( spinningObject);
-    //
-    //
-    //testObject->model = new ObjModel("models/steve/Steve.obj");
-    //spinningObject->model = testObject->model;
-    ////loadAtlas();
-
     tigl::shader->enableLighting(true);
     //tigl::shader->enableColorMult(false);
     tigl::shader->setLightCount(1);
     tigl::shader->setLightDirectional(0, false);
- 
+    tigl::shader->enableFog(enableFog);
     tigl::shader->setLightPosition(0, {0,0,0});
     tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
     tigl::shader->setLightAmbient(0, { 0.5f, 0.5f, 0.5f });
-    /*tigl::shader->setLightSpecular(0, {0,100,20}); */
-
+ 
     
 }
 
+bool fogPressed = false;
 void update(double deltatime)
 {
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS && !fogPressed) {
+        enableFog = !enableFog;
+        fogPressed = true;
+        tigl::shader->enableFog(enableFog);
+    }
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE && fogPressed) {
+        fogPressed = false;
+    }
+
+
     camera->update(deltatime);   
 
     for (auto& object : gameobjects) object->update(deltaTime);
@@ -133,6 +130,8 @@ void update(double deltatime)
 void draw()
 {
     glClearColor(0.3f, 0.4f, 0.6f, 1.0f);
+    tigl::shader->setFogColor(glm::vec3(0.3f, 0.4f, 0.6f));
+    tigl::shader->setFogLinear(0, 4);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     int viewport[4];
