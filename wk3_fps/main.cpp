@@ -45,7 +45,7 @@ void createCubeWithTexture(int xb, int yb, int sizeX, int sizeY);
 void rotateDegrees(glm::mat4& model, const glm::vec3 rotation);
 
 int main(void)
-{
+{   
     if (!glfwInit())
         throw "Could not initialize glwf";
     int count;
@@ -75,7 +75,7 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    s.save("test", gameobjects);
+    s.save("test2", gameobjects);
 	glfwTerminate();
 
     return 0;

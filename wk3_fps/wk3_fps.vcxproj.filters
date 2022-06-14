@@ -86,6 +86,12 @@
     <ClInclude Include="SerializationEnabler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="UUIDGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UUIDGeneratorSingleton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="unknown.png">

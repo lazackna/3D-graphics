@@ -8,6 +8,7 @@
 class GameObject
 {
 public:
+	unsigned long UUID = ULONG_MAX;
 	glm::vec3 transform = glm::vec3(0, 0, 0);
 	glm::vec3 rotation = glm::vec3(0, 0, 0);
 	glm::vec3 scale = glm::vec3(1, 1, 1);

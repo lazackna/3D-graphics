@@ -1,0 +1,6 @@
+UUID:0
+Type:GameObject
+UUID:1
+Type:MovableGameObject
+UUID:2
+Type:SpinningGameObject

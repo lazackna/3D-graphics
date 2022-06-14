@@ -182,6 +182,8 @@
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="tigl.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="UUIDGenerator.h" />
+    <ClInclude Include="UUIDGeneratorSingleton.h" />
     <ClInclude Include="WindowSingleton.h" />
   </ItemGroup>
   <ItemGroup>
