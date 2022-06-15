@@ -24,6 +24,7 @@ bool SceneManager::save(std::string sceneName, std::vector<GameObject*> gameobje
 		return false;
 	}
 	std::string garbageDump;
+	// Save the scene
 	for (int i = 0; i < gameobjects.size(); i++) {
 		GameObject* gameobject = gameobjects[i];
 		if (gameobject->UUID == ULONG_MAX) gameobject->UUID = UUIDGeneratorSingleton::getInstance().UUIDGenerator->createUUID();
@@ -40,11 +41,19 @@ bool SceneManager::save(std::string sceneName, std::vector<GameObject*> gameobje
 	output.close();
 
 	std::string objectsRoot = "scenes/" + sceneName;
+	// Save all objects.
 	for (int i = 0; i < gameobjects.size(); i++) {
 		GameObject* o = gameobjects[i];
+		
 		std::string temp = "/" + std::to_string(o->UUID);
 		std::string objectFileName = objectsRoot + temp;
+		output = std::ofstream("test");
+		output = std::ofstream("test/");
 		output = std::ofstream(objectFileName + ".gmobj");
+		if (!output.is_open()) {
+			std::cout << "Failed to create a save file!" << std::endl;
+			return false;
+		}
 		json object;
 		json extraData;
 	
