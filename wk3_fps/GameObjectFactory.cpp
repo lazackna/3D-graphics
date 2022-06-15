@@ -5,6 +5,7 @@
 #include <iostream>
 #include "SerializationEnabler.h"
 #include "json.hpp"
+#include "UUIDGeneratorSingleton.h"
 
 //#include "json.hpp"
 using json = nlohmann::json;
@@ -17,13 +18,8 @@ GameObject* GameObjectFactory::createGameObject(std::string scenePath, std::stri
 		std::cout << "Could not find gameobject file!" << std::endl;
 		return gameobject;
 	}
-	std::string dataString;
-	while (!input.eof()) {
-		std::string line;
-		std::getline(input, line);
-		dataString += line;
-	}
-	nlohmann::json data = nlohmann::json(dataString);
+	
+	nlohmann::json data = nlohmann::json::parse(input);
 	nlohmann::json extraData;
 	if (data.contains("extradata")) extraData = data["extradata"];
 	
@@ -37,18 +33,20 @@ GameObject* GameObjectFactory::createGameObject(std::string scenePath, std::stri
 		glm::vec3 spin = extraData["spin"];
 		gameobject = new SpinningGameObject(spin);
 	}
+	else {
+		return nullptr;
+	}
 	json test;
 	test["key"] = 1;
 	//currently calling any [] on json here crashes the application
 	int uuid = data["UUID"];
+	gameobject->UUID = uuid;
+	UUIDGeneratorSingleton::getInstance().UUIDGenerator->createUUID();
 	if (data.contains("model")) {
 		gameobject->model = new ObjModel(data["model"]);
 	}
 	else {
-		if (data.contains("vertexes")) {
-			gameobject->vertexes = data["vertexes"];
-		}
-		//gameobject->vertexes = vertexes;
+		gameobject->vertexes = data["vertexes"];
 	}
 	gameobject->transform = data["transform"];
 	gameobject->rotation = data["rotation"];

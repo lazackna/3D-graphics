@@ -14,10 +14,10 @@ std::vector<GameObject*> SceneFactory::createScene(std::string sceneName) {
 		return objects;
 	}
 	int currentObjectLine = -1;
+	std::string line;
 	std::string currenttype;
 	std::string currentUUID;
 	while (!input.eof()) {
-		std::string line;
 		std::getline(input, line);
 
 		std::vector<std::string> values = splitString(line, ":");
@@ -26,7 +26,7 @@ std::vector<GameObject*> SceneFactory::createScene(std::string sceneName) {
 		case 2:
 			//new object so automatically flow over to case 0.
 			currentObjectLine = 0;
-			GameObjectFactory::createGameObject(sceneName, currenttype, currentUUID);
+			objects.push_back(GameObjectFactory::createGameObject(sceneName, currenttype, currentUUID));
 		case 0:
 			// new uuid
 			currentUUID = values[1];
@@ -38,7 +38,7 @@ std::vector<GameObject*> SceneFactory::createScene(std::string sceneName) {
 			break;
 		}
 	}
-
+	objects.push_back(GameObjectFactory::createGameObject(sceneName, currenttype, currentUUID));
 	input.close();
 
 	return objects;
