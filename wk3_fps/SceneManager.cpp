@@ -3,9 +3,17 @@
 #include <iostream>
 //#include "util.h"
 #include "UUIDGeneratorSingleton.h"
+#include "SceneFactory.h"
+//#include "SerializationEnabler.h"
+#include <filesystem>
 
-#include "SerializationEnabler.h"
-using json = nlohmann::json;
+namespace fs = std::filesystem;
+
+void createDirectory(std::string path) {
+	if (!fs::is_directory(path) || !fs::exists(path)) {
+		fs::create_directory(path);
+	}
+}
 
 bool SceneManager::save(std::string sceneName, std::vector<GameObject*> gameobjects) {
 	std::cout << "Loading " << sceneName << std::endl;
@@ -16,7 +24,7 @@ bool SceneManager::save(std::string sceneName, std::vector<GameObject*> gameobje
 		dirName = dirName.substr(0, dirName.rfind("\\"));
 	if (sceneName == dirName)
 		dirName = "";
-
+	
 	std::ofstream output(dirName + "/" + sceneName + ".scene");
 
 	if (!output.is_open()) {
@@ -41,85 +49,51 @@ bool SceneManager::save(std::string sceneName, std::vector<GameObject*> gameobje
 	output.close();
 
 	std::string objectsRoot = "scenes/" + sceneName;
+	createDirectory(objectsRoot);
 	// Save all objects.
 	for (int i = 0; i < gameobjects.size(); i++) {
-		GameObject* o = gameobjects[i];
-		
-		std::string temp = "/" + std::to_string(o->UUID);
-		std::string objectFileName = objectsRoot + temp;
-		output = std::ofstream("test");
-		output = std::ofstream("test/");
-		output = std::ofstream(objectFileName + ".gmobj");
-		if (!output.is_open()) {
-			std::cout << "Failed to create a save file!" << std::endl;
-			return false;
-		}
-		json object;
-		json extraData;
-	
-		std::string typeName = typeid(*o).name();
-		typeName.replace(0, 6, garbageDump);
-		object["type"] = typeName;
-		object["UUID"] = o->UUID;
-		if (o->model) {
-			object["model"] = o->model->modelName;
-		}
-		else {
-
-			object["vertexes"] = o->vertexes;
-		}
-
-		//add transform, rotation, scale
-		object["transform"] = o->transform;
-		object["rotation"] = o->rotation;
-		object["scale"] = o->scale;
-
-		if (SpinningGameObject* so = dynamic_cast<SpinningGameObject*>(o)) {
-
-			extraData["spin"] = so->spin;
-
-		}
-		object["extradata"] = extraData;
-		output << object.dump();
-		output.close();
-	}
-
-	//json j;
-	//std::string garbageDump;
-	//std::vector<json> jsonObjectArray;
-	//for (int i = 0; i < gameobjects.size(); i++) {
+		GameObjectFactory::saveGameObject(objectsRoot, gameobjects[i]);
+	//	GameObject* o = gameobjects[i];
+	//	
+	//	std::string temp = "/" + std::to_string(o->UUID);
+	//	std::string objectFileName = objectsRoot + temp;
+	//	
+	//	output = std::ofstream(objectFileName + ".gmobj");
+	//	if (!output.is_open()) {
+	//		std::cout << "Failed to create a save file!" << std::endl;
+	//		return false;
+	//	}
 	//	json object;
 	//	json extraData;
-	//	GameObject* o = gameobjects[i];
+	//
 	//	std::string typeName = typeid(*o).name();
 	//	typeName.replace(0, 6, garbageDump);
 	//	object["type"] = typeName;
-
+	//	object["UUID"] = o->UUID;
 	//	if (o->model) {
 	//		object["model"] = o->model->modelName;
 	//	}
 	//	else {
-	//	
+
 	//		object["vertexes"] = o->vertexes;
 	//	}
-	//
+
 	//	//add transform, rotation, scale
 	//	object["transform"] = o->transform;
 	//	object["rotation"] = o->rotation;
 	//	object["scale"] = o->scale;
-	//	
+
 	//	if (SpinningGameObject* so = dynamic_cast<SpinningGameObject*>(o)) {
-	//	
+
 	//		extraData["spin"] = so->spin;
 
 	//	}
+	//	if(!extraData.empty())
 	//	object["extradata"] = extraData;
-	//	jsonObjectArray.push_back(object);
-	//}
-	//
-	//j["gameobjects"] = jsonObjectArray;
-	//output << j.dump();
-	//output.close();
+	//	output << object.dump();
+	//	output.close();
+	}
+
 	return true;
 }
 bool SceneManager::load(std::string sceneName, std::vector<GameObject*>& gameobjects) {
@@ -140,7 +114,8 @@ bool SceneManager::load(std::string sceneName, std::vector<GameObject*>& gameobj
 		return false;
 	}
 	
-	json extradata;
+	gameobjects = SceneFactory::createScene("scenes/" + sceneName);
+	/*json extradata;
 
 	json j = json::parse(input);
 	
@@ -151,7 +126,7 @@ bool SceneManager::load(std::string sceneName, std::vector<GameObject*>& gameobj
 
 		std::string type = object["type"];
 
-		GameObject* gameobject = GameObjectFactory::getGameObject(object["type"], object["extradata"]);
+		GameObject* gameobject = GameObjectFactory::createGameObject(object["type"], object["extradata"]);
 		if (object.contains("model")) {
 			gameobject->model = new ObjModel(object["model"]);
 		}
@@ -163,6 +138,6 @@ bool SceneManager::load(std::string sceneName, std::vector<GameObject*>& gameobj
 		gameobject->scale = object["scale"];
 
 		gameobjects.push_back(gameobject);
-	}
+	}*/
 	return true;
 }

@@ -1,13 +1,14 @@
 #pragma once
-#include "json.hpp"
-#include "MovableGameObject.h"
-#include "SpinningGameObject.h"
 
+#include <string>
+
+#include "GameObjects.h"
+
+class GameObject;
 class GameObjectFactory
 {
 public:
-	
-	static GameObject * getGameObject(std::string type);
-	static GameObject* getGameObject(std::string type, nlohmann::json extradata);
+	static GameObject* createGameObject(std::string scenePath, std::string objectType, std::string UUID);
+	static bool saveGameObject(std::string scenePath, GameObject* gameObject);
 };
 

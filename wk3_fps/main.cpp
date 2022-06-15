@@ -10,14 +10,15 @@
 #include "stb_image.h"
 #include "ObjModel.h"
 #include "WindowSingleton.h"
-//#include "SerializationEnabler.h"
-//#include "GameObjectFactory.h"
+#include "UUIDGeneratorSingleton.h"
 #include "SceneManager.h"
 using tigl::Vertex;
 
 #pragma comment(lib, "glfw3.lib")
 #pragma comment(lib, "glew32s.lib")
 #pragma comment(lib, "opengl32.lib")
+
+const std::string selectedScene = "test2";
 
 GLFWwindow* window;
 ObjModel* model;
@@ -44,6 +45,7 @@ void createGround();
 void createCubeWithTexture(int xb, int yb, int sizeX, int sizeY);
 void rotateDegrees(glm::mat4& model, const glm::vec3 rotation);
 
+
 int main(void)
 {   
     if (!glfwInit())
@@ -64,7 +66,7 @@ int main(void)
     tigl::init();
     
     init();
-    s.load("test", gameobjects);
+    s.load(selectedScene, gameobjects);
     while (!glfwWindowShouldClose(window))
     {
         double nowTime = glfwGetTime();
@@ -75,7 +77,7 @@ int main(void)
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    s.save("test2", gameobjects);
+    s.save(selectedScene, gameobjects);
 	glfwTerminate();
 
     return 0;
@@ -158,7 +160,8 @@ void draw()
 }
 
 void createGround() {
-    GameObject* groundObject = GameObjectFactory::getGameObject("GameObject");
+    GameObject* groundObject = GameObjectFactory::createGameObject("scenes/" + selectedScene, "GameObject", 
+        std::to_string(UUIDGeneratorSingleton::getInstance().UUIDGenerator->createUUID()));
     groundObject->transform = glm::vec3(0, -1, 0);
     groundObject->scale = glm::vec3(20, 1, 20);
     groundObject->vertexes.push_back(Vertex::PCTN(glm::vec3(0.5, 0, -0.5), glm::vec4(1.0, 1.0, 0.0, 1.0), glm::vec2(1, 0), glm::vec3(0, 1, 0)));//

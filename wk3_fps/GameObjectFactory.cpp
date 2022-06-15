@@ -1,33 +1,98 @@
 #include "GameObjectFactory.h"
-//#include "SerializationEnabler.h"
+
+#include "GameObject.h"
+#include <fstream>
+#include <iostream>
+#include "SerializationEnabler.h"
 #include "json.hpp"
-GameObject * GameObjectFactory::getGameObject(std::string type) {
-	if (type._Equal("GameObject")) { 
-		return new GameObject(); 
+
+//#include "json.hpp"
+using json = nlohmann::json;
+
+GameObject* GameObjectFactory::createGameObject(std::string scenePath, std::string objectType, std::string UUID) {
+	GameObject* gameobject = nullptr;
+
+	std::ifstream input = std::ifstream(scenePath + "/" + UUID + ".gmobj");
+	if (!input.is_open()) {
+		std::cout << "Could not find gameobject file!" << std::endl;
+		return gameobject;
 	}
-	else if (type._Equal("MovableGameObject")) { 
-		return new MovableGameObject(); 
+	std::string dataString;
+	while (!input.eof()) {
+		std::string line;
+		std::getline(input, line);
+		dataString += line;
 	}
-	else if (type._Equal("SpinningGameObject")) {
-		return new SpinningGameObject(glm::vec3(0, 1, 0));
-	}
+	nlohmann::json data = nlohmann::json(dataString);
+	nlohmann::json extraData;
+	if (data.contains("extradata")) extraData = data["extradata"];
 	
-	return nullptr;
+	if (objectType._Equal("GameObject")) {
+		gameobject = new GameObject();
+	}
+	else if (objectType._Equal("MovableGameObject")) {
+		gameobject = new MovableGameObject();
+	}
+	else if (objectType._Equal("SpinningGameObject")) {
+		glm::vec3 spin = extraData["spin"];
+		gameobject = new SpinningGameObject(spin);
+	}
+	json test;
+	test["key"] = 1;
+	//currently calling any [] on json here crashes the application
+	int uuid = data["UUID"];
+	if (data.contains("model")) {
+		gameobject->model = new ObjModel(data["model"]);
+	}
+	else {
+		if (data.contains("vertexes")) {
+			gameobject->vertexes = data["vertexes"];
+		}
+		//gameobject->vertexes = vertexes;
+	}
+	gameobject->transform = data["transform"];
+	gameobject->rotation = data["rotation"];
+	gameobject->scale = data["scale"];
+
+	return gameobject;
 }
 
-GameObject* GameObjectFactory::getGameObject(std::string type, nlohmann::json extradata) {
-	nlohmann::json j = extradata;
-	if (type._Equal("GameObject")) {
-		return new GameObject();
+bool GameObjectFactory::saveGameObject(std::string scenePath, GameObject* gameObject) {
+	std::string garbageDump;
+	std::string temp = "/" + std::to_string(gameObject->UUID);
+	std::string objectFileName = scenePath + temp;		
+	std::ofstream output = std::ofstream(objectFileName + ".gmobj");
+	if (!output.is_open()) {
+		std::cout << "Failed to create a save file!" << std::endl;
+		return false;
 	}
-	else if (type._Equal("MovableGameObject")) {
-		return new MovableGameObject();
-	}
-	else if (type._Equal("SpinningGameObject")) {
-		std::vector<float> spin = j["spin"];
+	json object;
+	json extraData;
 	
-		return new SpinningGameObject(glm::vec3(spin[0], spin[1], spin[2]));
+	std::string typeName = typeid(*gameObject).name();
+	typeName.replace(0, 6, garbageDump);
+	object["type"] = typeName;
+	object["UUID"] = gameObject->UUID;
+	if (gameObject->model) {
+		object["model"] = gameObject->model->modelName;
+	}
+	else {
+		object["vertexes"] = gameObject->vertexes;
 	}
 
-	return nullptr;
+	//add transform, rotation, scale
+	object["transform"] = gameObject->transform;
+	object["rotation"] = gameObject->rotation;
+	object["scale"] = gameObject->scale;
+
+	if (SpinningGameObject* so = dynamic_cast<SpinningGameObject*>(gameObject)) {
+
+		extraData["spin"] = so->spin;
+
+	}
+	if(!extraData.empty())
+	object["extradata"] = extraData;
+	output << object.dump();
+	output.close();
+	return true;
 }

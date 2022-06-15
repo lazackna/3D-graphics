@@ -10,7 +10,7 @@ using vec4 = glm::vec4;
 namespace glm {
 
 	void to_json(nlohmann::json& j, const vec2& v) {
-		j = nlohmann::json(nlohmann::json::array({ v[0],v[1]}));
+		j = nlohmann::json(nlohmann::json::array({ v[0],v[1] }));
 	}
 
 	void from_json(const nlohmann::json& j, vec2& v) {
@@ -18,7 +18,7 @@ namespace glm {
 	}
 
 	void to_json(nlohmann::json& j, const vec3& v) {
-		j = nlohmann::json(nlohmann::json::array({v[0],v[1],v[2]}));
+		j = nlohmann::json(nlohmann::json::array({ v[0],v[1],v[2] }));
 	}
 
 	void from_json(const nlohmann::json& j, vec3& v) {
@@ -26,7 +26,7 @@ namespace glm {
 	}
 
 	void to_json(nlohmann::json& j, const vec4& v) {
-		j = nlohmann::json(nlohmann::json::array({ v[0],v[1],v[2],v[3]}));
+		j = nlohmann::json(nlohmann::json::array({ v[0],v[1],v[2],v[3] }));
 	}
 
 	void from_json(const nlohmann::json& j, vec4& v) {
