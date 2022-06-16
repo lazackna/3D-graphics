@@ -45,7 +45,6 @@ void createGround();
 void createCubeWithTexture(int xb, int yb, int sizeX, int sizeY);
 void rotateDegrees(glm::mat4& model, const glm::vec3 rotation);
 
-
 int main(void)
 {   
     if (!glfwInit())
