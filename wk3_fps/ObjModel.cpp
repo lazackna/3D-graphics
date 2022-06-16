@@ -216,6 +216,9 @@ ObjModel::ObjModel(const std::string &fileName)
 
 ObjModel::~ObjModel(void)
 {
+	for (MaterialInfo* m : materials) {
+		delete m;
+	}
 }
 
 

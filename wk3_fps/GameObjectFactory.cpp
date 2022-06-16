@@ -7,7 +7,6 @@
 #include "json.hpp"
 #include "UUIDGeneratorSingleton.h"
 
-//#include "json.hpp"
 using json = nlohmann::json;
 
 GameObject* GameObjectFactory::createGameObject(std::string scenePath, std::string objectType, std::string UUID) {

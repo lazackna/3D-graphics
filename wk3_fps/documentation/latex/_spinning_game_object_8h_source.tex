@@ -1,0 +1,17 @@
+\hypertarget{_spinning_game_object_8h_source}{}\doxysection{Spinning\+Game\+Object.\+h}
+\mbox{\hyperlink{_spinning_game_object_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_game_object_8h}{GameObject.h}}"{}}}
+\DoxyCodeLine{3 \textcolor{keyword}{class }\mbox{\hyperlink{class_spinning_game_object}{SpinningGameObject}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_game_object}{GameObject}}}
+\DoxyCodeLine{4 \{}
+\DoxyCodeLine{5 \textcolor{keyword}{public}:}
+\DoxyCodeLine{6     \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \mbox{\hyperlink{class_spinning_game_object_a505241781543636cf853d3d529ae51af}{spin}};}
+\DoxyCodeLine{7 \textcolor{keyword}{public}:}
+\DoxyCodeLine{8     \mbox{\hyperlink{class_spinning_game_object_a7bfe28151cc62433bd5eeee0e4ac651e}{SpinningGameObject}}(\mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \_spin) : \mbox{\hyperlink{class_game_object}{GameObject}}(), \mbox{\hyperlink{class_spinning_game_object_a505241781543636cf853d3d529ae51af}{spin}}(\_spin) \{\}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_spinning_game_object_a3f847eeae94dfbd0b1547d03793a4fb3}{update}}(\textcolor{keywordtype}{float} deltatime);}
+\DoxyCodeLine{11 \};}
+\DoxyCodeLine{12 }
+
+\end{DoxyCode}

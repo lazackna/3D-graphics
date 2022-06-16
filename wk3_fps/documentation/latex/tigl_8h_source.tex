@@ -1,0 +1,176 @@
+\hypertarget{tigl_8h_source}{}\doxysection{tigl.\+h}
+\mbox{\hyperlink{tigl_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <GL/glew.h>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <glm/glm.hpp>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacetigl}{tigl}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10     \textcolor{keyword}{namespace }internal}
+\DoxyCodeLine{11     \{}
+\DoxyCodeLine{12         \textcolor{keyword}{class }\mbox{\hyperlink{classtigl_1_1internal_1_1_shader}{Shader}}}
+\DoxyCodeLine{13         \{}
+\DoxyCodeLine{14         \textcolor{keyword}{public}:}
+\DoxyCodeLine{15             \textcolor{keyword}{virtual} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_abca4c0de0e7bb103b1d1f951b490c6cf}{\string~Shader}}() \{\};}
+\DoxyCodeLine{16             }
+\DoxyCodeLine{17             \textcolor{comment}{// Sets the projection matrix}}
+\DoxyCodeLine{18             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a99d75e9af0e8321adfca765f712aca1e}{setProjectionMatrix}}(\textcolor{keyword}{const} glm::mat4\& matrix) = 0;}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20             \textcolor{comment}{// Sets the view (camera) matrix}}
+\DoxyCodeLine{21             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_acb40ab980aa7d88a4ed5fd7cd75b69fa}{setViewMatrix}}(\textcolor{keyword}{const} glm::mat4\& matrix) = 0;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23             \textcolor{comment}{// Sets the model matrix}}
+\DoxyCodeLine{24             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_aaa1b200ff37cd4307ea035884f791325}{setModelMatrix}}(\textcolor{keyword}{const} glm::mat4\& matrix) = 0;}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26             \textcolor{comment}{// enables the use of the colors set in vertices}}
+\DoxyCodeLine{27             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a9eaa7df1be769f55a20e1bbab68bea1d}{enableColor}}(\textcolor{keywordtype}{bool} enabled) = 0;}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29             \textcolor{comment}{// enables the use of texture coordinats set in vertices, and uses textures set in texture sampler}}
+\DoxyCodeLine{30             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a8adde931cc4ba0109fbb52633c774fc9}{enableTexture}}(\textcolor{keywordtype}{bool} enabled) = 0;}
+\DoxyCodeLine{31             }
+\DoxyCodeLine{32             \textcolor{comment}{// enables the lighting}}
+\DoxyCodeLine{33             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a35d1cbc698cd3d4bf9d5e6ad8dd79be2}{enableLighting}}(\textcolor{keywordtype}{bool} enabled) = 0;}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35             \textcolor{comment}{// sets the number of lights}}
+\DoxyCodeLine{36             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_ad7c6149c61f92010b335674aabfa1a1c}{setLightCount}}(\textcolor{keywordtype}{int} count) = 0;}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38             \textcolor{comment}{// sets the light as directional or positional}}
+\DoxyCodeLine{39             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a188c51407fafcdc59bd48cb65d33f864}{setLightDirectional}}(\textcolor{keywordtype}{int} lightNr, \textcolor{keywordtype}{bool} isDirectional) = 0;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41             \textcolor{comment}{// sets the position of the light. If the light is a directional light, the position is interpreted as a direction}}
+\DoxyCodeLine{42             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a18c2ba3c1a06a7b7736fa45f7de323e2}{setLightPosition}}(\textcolor{keywordtype}{int} lightNr, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& position) = 0;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44             \textcolor{comment}{// sets the ambient color of a light}}
+\DoxyCodeLine{45             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_aa27b9d86a366134b8e0148d28a69c314}{setLightAmbient}}(\textcolor{keywordtype}{int} lightNr, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& color) = 0;}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47             \textcolor{comment}{// sets the diffuse color of a light}}
+\DoxyCodeLine{48             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_ad925c2fe6bb2647dde8104dca4b72413}{setLightDiffuse}}(\textcolor{keywordtype}{int} lightNr, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& color) = 0;}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50             \textcolor{comment}{// sets the specular color of a light}}
+\DoxyCodeLine{51             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a2cf41382354b3dcb0772143e5083bf5a}{setLightSpecular}}(\textcolor{keywordtype}{int} lightNr, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& color) = 0;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53             \textcolor{comment}{// sets the shinyness of the material drawn. Used for specular calculations}}
+\DoxyCodeLine{54             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a79ac1f44cc61e587ce3fe99bdbb82615}{setShinyness}}(\textcolor{keywordtype}{float} shinyness) = 0;}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56             \textcolor{comment}{// Enables color multiplication. If enabled, all colors (texture and vertex colors) will be multiplied by the color set by the setColorMult method}}
+\DoxyCodeLine{57             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_ad658c64d025a258aabd0199664f3b2db}{enableColorMult}}(\textcolor{keywordtype}{bool} enabled) = 0;}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59             \textcolor{comment}{// Changes the color that output will be multiplied with when enableColorMult is enabled}}
+\DoxyCodeLine{60             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a8e2eae16fdeedbd78ee29419558d08e4}{setColorMult}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}\& color) = 0;}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62             \textcolor{comment}{// Enables alpha testing. Will stop rendering everything with a low alpha value}}
+\DoxyCodeLine{63             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a6a2415f84248308473032dc83787021c}{enableAlphaTest}}(\textcolor{keywordtype}{bool} enabled) = 0;}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65             \textcolor{comment}{// Enables fog}}
+\DoxyCodeLine{66             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_af53bd65d437c0b1e84f5121bb3914dd0}{enableFog}}(\textcolor{keywordtype}{bool} enabled) = 0;}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68             \textcolor{comment}{// Sets the fog to linear}}
+\DoxyCodeLine{69             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a2750df0da3510c4e8373aee385a213b7}{setFogLinear}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{namespacetigl_a88d69aef8d0b0027ef30353fda3fb92c}{begin}}, \textcolor{keywordtype}{float} \mbox{\hyperlink{namespacetigl_a9a4b35cebda0b7707380796a6c149cfc}{end}}) = 0;}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71             \textcolor{comment}{// Sets the fog to Exponential}}
+\DoxyCodeLine{72             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_ad474f4fb12ea09fe4891c208b8c3a42b}{setFogExp}}(\textcolor{keywordtype}{float} density) = 0;}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74             \textcolor{comment}{// Sets the fog to Exponential}}
+\DoxyCodeLine{75             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_ab3e86467bce6cec15c81329077fcf145}{setFogExp2}}(\textcolor{keywordtype}{float} density) = 0;}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77             \textcolor{comment}{// Sets the color of the fog}}
+\DoxyCodeLine{78             \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1internal_1_1_shader_a46b5546cb1b93338b8646bef960c7556}{setFogColor}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \&color) = 0;}
+\DoxyCodeLine{79         \};}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81     \textcolor{comment}{// A simple structure to store vertices. Can store positions, normals, colors and texture coordinats}}
+\DoxyCodeLine{82     \textcolor{keyword}{struct }\mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}}}
+\DoxyCodeLine{83     \{}
+\DoxyCodeLine{84     \textcolor{keyword}{public}:}
+\DoxyCodeLine{85         \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}};}
+\DoxyCodeLine{86         \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}};}
+\DoxyCodeLine{87         \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}} \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}};}
+\DoxyCodeLine{88         \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}} \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         \textcolor{comment}{// Creates a vertex with a position}}
+\DoxyCodeLine{91         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_a58b9e2f4fce7ae6fa763565c5ccf4b86}{P}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}) \{}
+\DoxyCodeLine{92             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(0,1,0), \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}(1,1,1,1), \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}(0,0) \};}
+\DoxyCodeLine{93         \}}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95         \textcolor{comment}{// Creates a vertex with a position and a color}}
+\DoxyCodeLine{96         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_adf9edc2d2c27b22a8e470eee29b4fd67}{PC}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}\& \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}) \{}
+\DoxyCodeLine{97             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(0,1,0), \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}, \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}(0,0) \};}
+\DoxyCodeLine{98         \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100         \textcolor{comment}{// Creates a vertex with a position and a texture coordinat}}
+\DoxyCodeLine{101         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_a6e5ba36a45ec9fe8d3429c3be53dc130}{PT}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}\& \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}}) \{}
+\DoxyCodeLine{102             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(0,1,0), \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}(1,1,1,1), \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}} \};}
+\DoxyCodeLine{103         \}}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105         \textcolor{comment}{// Creates a vertex with a position and a normal}}
+\DoxyCodeLine{106         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_a4c238c9c8185dc671f90630e65074390}{PN}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}) \{}
+\DoxyCodeLine{107             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}, \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}(1,1,1,1), \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}(0,0) \};}
+\DoxyCodeLine{108         \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110         \textcolor{comment}{// Creates a vertex with a position, a texture coordinat and a color}}
+\DoxyCodeLine{111         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_aca85463ab4ff8086025ccd2d2a579039}{PTC}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}\& \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}} \&\mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}) \{}
+\DoxyCodeLine{112             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(0,1,0), \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}, \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}} \};}
+\DoxyCodeLine{113         \}}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116         \textcolor{comment}{// Creates a vertex with a position, color and normal}}
+\DoxyCodeLine{117         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_aa6fe23ed4e49037629b25d08339e4ac4}{PCN}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}\& \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}) \{}
+\DoxyCodeLine{118             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}, \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}, \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}(0,0) \};}
+\DoxyCodeLine{119         \}}
+\DoxyCodeLine{120 }
+\DoxyCodeLine{121         \textcolor{comment}{// Creates a vertex with a position, texture coordinat and normal}}
+\DoxyCodeLine{122         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_ab890682495b03deacfbf0c2da56a9cb5}{PTN}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}\& \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}) \{}
+\DoxyCodeLine{123             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}, \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}(1,1,1,1), \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}} \};}
+\DoxyCodeLine{124         \}}
+\DoxyCodeLine{125 }
+\DoxyCodeLine{126         \textcolor{comment}{// Creates a vertex with a position, color, texture coordinat and normal}}
+\DoxyCodeLine{127         \textcolor{keyword}{static} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \mbox{\hyperlink{structtigl_1_1_vertex_a296c74d882d96f3e8f92c41aafe611c0}{PCTN}}(\textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}\& \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}\& \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}}, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}\& \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}) \{}
+\DoxyCodeLine{128             \textcolor{keywordflow}{return} \{ \mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}}, \mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}}, \mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}}, \mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}} \};}
+\DoxyCodeLine{129         \}}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{131         \textcolor{keywordtype}{bool} \mbox{\hyperlink{structtigl_1_1_vertex_aa99387f42fd3cd3109b63e71e1361304}{operator == }}(\textcolor{keyword}{const} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}}\& other);}
+\DoxyCodeLine{132     \};}
+\DoxyCodeLine{133 }
+\DoxyCodeLine{134     \textcolor{keyword}{class }\mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}}}
+\DoxyCodeLine{135     \{}
+\DoxyCodeLine{136     \textcolor{keyword}{public}:}
+\DoxyCodeLine{137         \mbox{\hyperlink{classtigl_1_1_v_b_o_af11706c9b60149a9c47da8f9f83a65ff}{\string~VBO}}();}
+\DoxyCodeLine{138     \textcolor{keyword}{private}:}
+\DoxyCodeLine{139         GLuint id;}
+\DoxyCodeLine{140         \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} size;}
+\DoxyCodeLine{141         \textcolor{keyword}{friend} \textcolor{keywordtype}{void} \mbox{\hyperlink{classtigl_1_1_v_b_o_a5274c5453c58551dff6aa5b6cc04a714}{drawVertices}}(GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}}, \mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}}* vbo);}
+\DoxyCodeLine{142         \textcolor{keyword}{friend} \mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}}* \mbox{\hyperlink{classtigl_1_1_v_b_o_a1fb95674baa813f9064b0ecb9af64843}{createVbo}}(\textcolor{keyword}{const} std::vector<Vertex>\& \mbox{\hyperlink{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}{vertices}});}
+\DoxyCodeLine{143     \};}
+\DoxyCodeLine{144 }
+\DoxyCodeLine{145     \textcolor{comment}{// Access point for the shader}}
+\DoxyCodeLine{146     \textcolor{keyword}{extern} std::unique\_ptr<internal::Shader> \mbox{\hyperlink{namespacetigl_a73bd593223e98a3369b108c5ba71fb5f}{shader}};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{148     \textcolor{comment}{// Call to initialize. Loads the shader}}
+\DoxyCodeLine{149     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_a34cd5a3b10c746f9a79402424e4efd72}{init}}();}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{comment}{// Call to start a set of OpenGL primitives}}
+\DoxyCodeLine{152     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_a88d69aef8d0b0027ef30353fda3fb92c}{begin}}(GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}});}
+\DoxyCodeLine{153 }
+\DoxyCodeLine{154     \textcolor{comment}{// Adds a single vertex to the set}}
+\DoxyCodeLine{155     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_af9fb069737ec4a2d6c1692e4ada3649b}{addVertex}}(\textcolor{keyword}{const} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}}\& vertex);}
+\DoxyCodeLine{156 }
+\DoxyCodeLine{157     \textcolor{comment}{// Finishes and draws the vertices given}}
+\DoxyCodeLine{158     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_a9a4b35cebda0b7707380796a6c149cfc}{end}}();}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{160     \textcolor{comment}{// Draws a full array of vertices}}
+\DoxyCodeLine{161     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_aa22bf60a6f9f7a5ce7dda206a1892f4e}{drawVertices}}(GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}}, \textcolor{keyword}{const} std::vector<Vertex> \&\mbox{\hyperlink{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}{vertices}});}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163     \textcolor{comment}{// Creates a VBO}}
+\DoxyCodeLine{164     \mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}}* \mbox{\hyperlink{namespacetigl_a5db9719226dc465fb422ee13b1b0a4f5}{createVbo}}(\textcolor{keyword}{const} std::vector<Vertex> \&\mbox{\hyperlink{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}{vertices}});}
+\DoxyCodeLine{165 }
+\DoxyCodeLine{166     \textcolor{comment}{// draws vertices from a VBO}}
+\DoxyCodeLine{167     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_aa22bf60a6f9f7a5ce7dda206a1892f4e}{drawVertices}}(GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}}, \mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}}* vbo);}
+\DoxyCodeLine{168 \}}
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170 }
+\DoxyCodeLine{171 }
+
+\end{DoxyCode}

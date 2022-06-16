@@ -1,4 +1,11 @@
 #pragma once
+
+/// <summary>
+/// Used to calculate modulo of a float with the remaining decimals returned as well.
+/// </summary>
+/// <param name="value"></param> Is the value that needs to be modulo'd
+/// <param name="modulo"></param> Is the modulo factor.
+/// <returns>A float modulo. This will have the remaining decimal numbers as well.</returns>
 inline float float_mod(float value, int modulo) {
 	int tmpVal = (int)value;
 
@@ -10,6 +17,12 @@ inline float float_mod(float value, int modulo) {
 
 #include <string>
 #include <vector>
+/// <summary>
+/// Used to split a string into a vector.
+/// </summary>
+/// <param name="val"></param> The value that needs to be split.
+/// <param name="delimiter"></param> The value on which val must be split.
+/// <returns>A vector of type string</returns>
 inline std::vector<std::string> splitString(std::string val, std::string delimiter) {
 	std::vector<std::string> vals;
 	if (delimiter.empty()) {

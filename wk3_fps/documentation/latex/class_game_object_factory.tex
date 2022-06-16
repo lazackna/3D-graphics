@@ -1,0 +1,73 @@
+\hypertarget{class_game_object_factory}{}\doxysection{Game\+Object\+Factory Class Reference}
+\label{class_game_object_factory}\index{GameObjectFactory@{GameObjectFactory}}
+
+
+{\ttfamily \#include $<$Game\+Object\+Factory.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$ \mbox{\hyperlink{class_game_object_factory_af448ccc93d51c1310a76494660b41ccc}{create\+Game\+Object}} (std\+::string scene\+Path, std\+::string object\+Type, std\+::string UUID)
+\begin{DoxyCompactList}\small\item\em Used to create a gameobject through a file. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_game_object_factory_a00ef41ea693623a10dbbd6acd2c59e66}{save\+Game\+Object}} (std\+::string scene\+Path, \mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$game\+Object)
+\begin{DoxyCompactList}\small\item\em Used to save a gameobject. Method is placed in this class to prevent multiple definition with nlohmann. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_object_factory_af448ccc93d51c1310a76494660b41ccc}\label{class_game_object_factory_af448ccc93d51c1310a76494660b41ccc}} 
+\index{GameObjectFactory@{GameObjectFactory}!createGameObject@{createGameObject}}
+\index{createGameObject@{createGameObject}!GameObjectFactory@{GameObjectFactory}}
+\doxysubsubsection{\texorpdfstring{createGameObject()}{createGameObject()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$ Game\+Object\+Factory\+::create\+Game\+Object (\begin{DoxyParamCaption}\item[{std\+::string}]{scene\+Path,  }\item[{std\+::string}]{object\+Type,  }\item[{std\+::string}]{UUID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Used to create a gameobject through a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Path} & \\
+\hline
+\end{DoxyParams}
+The path of the scene the object resides in. 
+\begin{DoxyParams}{Parameters}
+{\em object\+Type} & \\
+\hline
+\end{DoxyParams}
+The object type the object is. 
+\begin{DoxyParams}{Parameters}
+{\em UUID} & \\
+\hline
+\end{DoxyParams}
+The UUID of the gameobject. This is used to look up which file to use. \begin{DoxyReturn}{Returns}
+A constructed Gameobject$\ast$. If a file was not found a nullptr is returned. If the object\+Type is not known in the system a nullptr will be returned.
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_game_object_factory_a00ef41ea693623a10dbbd6acd2c59e66}\label{class_game_object_factory_a00ef41ea693623a10dbbd6acd2c59e66}} 
+\index{GameObjectFactory@{GameObjectFactory}!saveGameObject@{saveGameObject}}
+\index{saveGameObject@{saveGameObject}!GameObjectFactory@{GameObjectFactory}}
+\doxysubsubsection{\texorpdfstring{saveGameObject()}{saveGameObject()}}
+{\footnotesize\ttfamily bool Game\+Object\+Factory\+::save\+Game\+Object (\begin{DoxyParamCaption}\item[{std\+::string}]{scene\+Path,  }\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Used to save a gameobject. Method is placed in this class to prevent multiple definition with nlohmann. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Path} & \\
+\hline
+\end{DoxyParams}
+The scene the object needs to be saved in. 
+\begin{DoxyParams}{Parameters}
+{\em game\+Object} & \\
+\hline
+\end{DoxyParams}
+The gameobject that needs to be saved. \begin{DoxyReturn}{Returns}
+A boolean that indicates if the save was succesfull.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_game_object_factory_8h}{Game\+Object\+Factory.\+h}}\item 
+\mbox{\hyperlink{_game_object_factory_8cpp}{Game\+Object\+Factory.\+cpp}}\end{DoxyCompactItemize}

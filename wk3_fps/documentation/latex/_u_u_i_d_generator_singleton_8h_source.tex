@@ -1,0 +1,28 @@
+\hypertarget{_u_u_i_d_generator_singleton_8h_source}{}\doxysection{UUIDGenerator\+Singleton.\+h}
+\mbox{\hyperlink{_u_u_i_d_generator_singleton_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_u_u_i_d_generator_8h}{UUIDGenerator.h}}"{}}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{keyword}{class }\mbox{\hyperlink{class_u_u_i_d_generator_singleton}{UUIDGeneratorSingleton}} \{}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{public}:}
+\DoxyCodeLine{7     \mbox{\hyperlink{class_u_u_i_d_generator}{UUIDGenerator}}* \mbox{\hyperlink{class_u_u_i_d_generator_singleton_ad493706d29df0e1bc95db1580df14f18}{UUIDGenerator}};}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \textcolor{keyword}{static} \mbox{\hyperlink{class_u_u_i_d_generator_singleton}{UUIDGeneratorSingleton}}\& \mbox{\hyperlink{class_u_u_i_d_generator_singleton_a18c16de794f45fcd76f0eae5990c35ae}{getInstance}}() \{}
+\DoxyCodeLine{11         \textcolor{keyword}{static} \mbox{\hyperlink{class_u_u_i_d_generator_singleton}{UUIDGeneratorSingleton}} instance;}
+\DoxyCodeLine{12         \textcolor{keywordflow}{return} instance;}
+\DoxyCodeLine{13     \}}
+\DoxyCodeLine{14 \textcolor{keyword}{private}:}
+\DoxyCodeLine{15     \mbox{\hyperlink{class_u_u_i_d_generator_singleton}{UUIDGeneratorSingleton}}() \{\}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     \textcolor{comment}{//WindowSingleton(WindowSingleton const\&);}}
+\DoxyCodeLine{18     \textcolor{comment}{//void operator=(WindowSingleton const\&);}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{public}:}
+\DoxyCodeLine{21     \mbox{\hyperlink{class_u_u_i_d_generator_singleton_aad6a76448fc26b8b7975e73169a3ffb9}{UUIDGeneratorSingleton}}(\mbox{\hyperlink{class_u_u_i_d_generator_singleton}{UUIDGeneratorSingleton}} \textcolor{keyword}{const}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_u_u_i_d_generator_singleton_a91b53a2b538189c0b984623de068c676}{operator=}}(\mbox{\hyperlink{class_u_u_i_d_generator_singleton}{UUIDGeneratorSingleton}} \textcolor{keyword}{const}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{23 \};}
+
+\end{DoxyCode}

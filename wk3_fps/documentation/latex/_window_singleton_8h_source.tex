@@ -1,0 +1,27 @@
+\hypertarget{_window_singleton_8h_source}{}\doxysection{Window\+Singleton.\+h}
+\mbox{\hyperlink{_window_singleton_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <GLFW/glfw3.h>}}
+\DoxyCodeLine{3 \textcolor{keyword}{class }\mbox{\hyperlink{class_window_singleton}{WindowSingleton}} \{}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{public}:}
+\DoxyCodeLine{6     GLFWwindow* \mbox{\hyperlink{class_window_singleton_a78a31cee38816dd924bcbcc756041f9a}{window}};}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{public}:}
+\DoxyCodeLine{9     \textcolor{keyword}{static} \mbox{\hyperlink{class_window_singleton}{WindowSingleton}}\& \mbox{\hyperlink{class_window_singleton_aabff2bcca76de16303cf5b5411a21f92}{getInstance}}() \{}
+\DoxyCodeLine{10         \textcolor{keyword}{static} \mbox{\hyperlink{class_window_singleton}{WindowSingleton}} instance;}
+\DoxyCodeLine{11         \textcolor{keywordflow}{return} instance;}
+\DoxyCodeLine{12     \}}
+\DoxyCodeLine{13 private :}
+\DoxyCodeLine{14     \mbox{\hyperlink{class_window_singleton}{WindowSingleton}}() \{\}}
+\DoxyCodeLine{15     }
+\DoxyCodeLine{16     \textcolor{comment}{//WindowSingleton(WindowSingleton const\&);}}
+\DoxyCodeLine{17     \textcolor{comment}{//void operator=(WindowSingleton const\&);}}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{public}:}
+\DoxyCodeLine{20     \mbox{\hyperlink{class_window_singleton_a064e33376557843e97ac087f15dc2500}{WindowSingleton}}(\mbox{\hyperlink{class_window_singleton}{WindowSingleton}} \textcolor{keyword}{const}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{21     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_window_singleton_a3a38d97dddb9eecd35dd021252075b66}{operator=}}(\mbox{\hyperlink{class_window_singleton}{WindowSingleton}} \textcolor{keyword}{const}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{22 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,36 @@
+\hypertarget{_game_object_8h_source}{}\doxysection{Game\+Object.\+h}
+\mbox{\hyperlink{_game_object_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <glm/gtc/matrix\_transform.hpp>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tigl_8h}{tigl.h}}"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_obj_model_8h}{ObjModel.h}}"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}GLFW/glfw3.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{_window_singleton_8h}{WindowSingleton.h}}"{}}}
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_object}{GameObject}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{long} \mbox{\hyperlink{class_game_object_a6e3c8937e4ddc0e01b38d6680410361d}{UUID}} = ULONG\_MAX;}
+\DoxyCodeLine{12     \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \mbox{\hyperlink{class_game_object_a4e39285c45e1444eb3e6d11f8a279dfd}{transform}} = \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(0, 0, 0);}
+\DoxyCodeLine{13     \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \mbox{\hyperlink{class_game_object_acaf894c39661e6d4c13ad39b60684a38}{rotation}} = \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(0, 0, 0);}
+\DoxyCodeLine{14     \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} \mbox{\hyperlink{class_game_object_a5205edf429098d4b7bf0c442d72592d1}{scale}} = \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(1, 1, 1);}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     std::vector<tigl::Vertex> \mbox{\hyperlink{class_game_object_a169e08fa18f0d8e48f74caecdb4442aa}{vertexes}};}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_obj_model}{ObjModel}} * \mbox{\hyperlink{class_game_object_a83226a01eb95a30a3df52f4dec638604}{model}};}
+\DoxyCodeLine{18 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{19     GLFWwindow* \mbox{\hyperlink{class_game_object_a9e3f3f3ca2492213ca029c2c844a43ba}{window}};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{public}:}
+\DoxyCodeLine{22     \mbox{\hyperlink{class_game_object_a0348e3ee2e83d56eafca7a3547f432c4}{GameObject}}() \{\mbox{\hyperlink{class_game_object_a9e3f3f3ca2492213ca029c2c844a43ba}{window}} = \mbox{\hyperlink{class_window_singleton_aabff2bcca76de16303cf5b5411a21f92}{WindowSingleton::getInstance}}().\mbox{\hyperlink{class_window_singleton_a78a31cee38816dd924bcbcc756041f9a}{window}};\}}
+\DoxyCodeLine{23     \mbox{\hyperlink{class_game_object_ab82dfdb656f9051c0587e6593b2dda97}{\string~GameObject}}() \{}
+\DoxyCodeLine{24         \textcolor{keyword}{delete} \mbox{\hyperlink{class_game_object_a83226a01eb95a30a3df52f4dec638604}{model}};}
+\DoxyCodeLine{25     \}}
+\DoxyCodeLine{26     \textcolor{comment}{/*GameObject(std::vector<tigl::Vertex> \_vertexes) : vertexes(\_vertexes) \{\}}}
+\DoxyCodeLine{27 \textcolor{comment}{    GameObject(std::string\& fileName) : model(new ObjModel(fileName)) \{ \}*/}}
+\DoxyCodeLine{28     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_object_abb64143e72358beb808db22182517802}{draw}}();}
+\DoxyCodeLine{29     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_game_object_ad952e8ab193f501fcbbd9cdd7af38077}{update}}(\textcolor{keywordtype}{float} \mbox{\hyperlink{main_8cpp_afac460bb6131314e58628ebd514f53c7}{deltaTime}});}
+\DoxyCodeLine{30 \};}
+\DoxyCodeLine{31 }
+
+\end{DoxyCode}

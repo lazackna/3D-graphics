@@ -1,0 +1,39 @@
+\hypertarget{tigl_8h}{}\doxysection{tigl.\+h File Reference}
+\label{tigl_8h}\index{tigl.h@{tigl.h}}
+{\ttfamily \#include $<$GL/glew.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$glm/glm.\+hpp$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtigl_1_1internal_1_1_shader}{tigl\+::internal\+::\+Shader}}
+\item 
+struct \mbox{\hyperlink{structtigl_1_1_vertex}{tigl\+::\+Vertex}}
+\item 
+class \mbox{\hyperlink{classtigl_1_1_v_b_o}{tigl\+::\+VBO}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacetigl}{tigl}}
+\item 
+namespace \mbox{\hyperlink{namespacetigl_1_1internal}{tigl\+::internal}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacetigl_a34cd5a3b10c746f9a79402424e4efd72}{tigl\+::init}} ()
+\item 
+void \mbox{\hyperlink{namespacetigl_a88d69aef8d0b0027ef30353fda3fb92c}{tigl\+::begin}} (GLenum shape)
+\item 
+void \mbox{\hyperlink{namespacetigl_af9fb069737ec4a2d6c1692e4ada3649b}{tigl\+::add\+Vertex}} (const Vertex \&vertex)
+\item 
+void \mbox{\hyperlink{namespacetigl_a9a4b35cebda0b7707380796a6c149cfc}{tigl\+::end}} ()
+\item 
+void \mbox{\hyperlink{namespacetigl_aa22bf60a6f9f7a5ce7dda206a1892f4e}{tigl\+::draw\+Vertices}} (GLenum shape, const std\+::vector$<$ Vertex $>$ \&vertices)
+\item 
+VBO $\ast$ \mbox{\hyperlink{namespacetigl_a5db9719226dc465fb422ee13b1b0a4f5}{tigl\+::create\+Vbo}} (const std\+::vector$<$ Vertex $>$ \&vertices)
+\item 
+void \mbox{\hyperlink{namespacetigl_a24062c16160f0e3ae944f7e847e6da5f}{tigl\+::draw\+Vertices}} (GLenum shape, VBO $\ast$vbo)
+\end{DoxyCompactItemize}

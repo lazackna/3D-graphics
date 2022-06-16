@@ -1,0 +1,27 @@
+\hypertarget{_fps_cam_8h_source}{}\doxysection{Fps\+Cam.\+h}
+\mbox{\hyperlink{_fps_cam_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <glm/glm.hpp>}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 \textcolor{keyword}{struct }GLFWwindow;}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_fps_cam}{FpsCam}}}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8     GLFWwindow* window;}
+\DoxyCodeLine{9 \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \mbox{\hyperlink{class_fps_cam_a1b2ec468e82a3a7f57193f949e4a620d}{FpsCam}}(GLFWwindow*);}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     glm::mat4 \mbox{\hyperlink{class_fps_cam_aa9d888e0e78d1bb553373c7bc3555b33}{getMatrix}}();}
+\DoxyCodeLine{13     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_fps_cam_ac77ddf6bb48a7585ca6055da883c4685}{update}}(\textcolor{keywordtype}{float} deltatime);}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{private}:}
+\DoxyCodeLine{16     \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}} position = \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(0, 0, 0);}
+\DoxyCodeLine{17     \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}} rotation = \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}(0, 0);}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} move(\textcolor{keywordtype}{float} angle, \textcolor{keywordtype}{float} fac, \textcolor{keywordtype}{float} deltatime);}
+\DoxyCodeLine{20 \};}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 }
+
+\end{DoxyCode}

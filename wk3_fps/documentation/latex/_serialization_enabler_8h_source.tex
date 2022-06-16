@@ -1,0 +1,56 @@
+\hypertarget{_serialization_enabler_8h_source}{}\doxysection{Serialization\+Enabler.\+h}
+\mbox{\hyperlink{_serialization_enabler_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <glm/glm.hpp>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{json_8hpp}{json.hpp}}"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{tigl_8h}{tigl.h}}"{}}}
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{using }\mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{vec2}} = \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}};}
+\DoxyCodeLine{7 \textcolor{keyword}{using }\mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{vec3}} = \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}};}
+\DoxyCodeLine{8 \textcolor{keyword}{using }\mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{vec4}} = \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}};}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceglm}{glm}} \{}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceglm_a82d08c9e0c9776e9aabf657bba8bcedc}{to\_json}}(\mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{vec2}}\& v) \{}
+\DoxyCodeLine{13         j = \mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann::json}}(nlohmann::json::array(\{ v[0],v[1] \}));}
+\DoxyCodeLine{14     \}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceglm_a39e5e9eadc7fe90bc50f3be24404b047}{from\_json}}(\textcolor{keyword}{const} \mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{vec2}}\& v) \{}
+\DoxyCodeLine{17         v = \mbox{\hyperlink{_serialization_enabler_8h_a144e0eb67f8fd00c2cd833420827c07a}{glm::vec2}}(j[0], j[1]);}
+\DoxyCodeLine{18     \}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceglm_a82d08c9e0c9776e9aabf657bba8bcedc}{to\_json}}(\mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{vec3}}\& v) \{}
+\DoxyCodeLine{21         j = \mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann::json}}(nlohmann::json::array(\{ v[0],v[1],v[2] \}));}
+\DoxyCodeLine{22     \}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceglm_a39e5e9eadc7fe90bc50f3be24404b047}{from\_json}}(\textcolor{keyword}{const} \mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{vec3}}\& v) \{}
+\DoxyCodeLine{25         v = \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm::vec3}}(j[0], j[1], j[2]);}
+\DoxyCodeLine{26     \}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceglm_a82d08c9e0c9776e9aabf657bba8bcedc}{to\_json}}(\mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \textcolor{keyword}{const} \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{vec4}}\& v) \{}
+\DoxyCodeLine{29         j = \mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann::json}}(nlohmann::json::array(\{ v[0],v[1],v[2],v[3] \}));}
+\DoxyCodeLine{30     \}}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespaceglm_a39e5e9eadc7fe90bc50f3be24404b047}{from\_json}}(\textcolor{keyword}{const} \mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{vec4}}\& v) \{}
+\DoxyCodeLine{33         v = \mbox{\hyperlink{_serialization_enabler_8h_a9ae62764501b2965343d3ec76a107b03}{glm::vec4}}(j[0], j[1], j[2], j[3]);}
+\DoxyCodeLine{34     \}}
+\DoxyCodeLine{35 \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacetigl}{tigl}} \{}
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_ab4a747056fc57e82cd30c8b285dd3626}{to\_json}}(\mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \textcolor{keyword}{const} \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}}\& v) \{}
+\DoxyCodeLine{39         j[\textcolor{stringliteral}{"{}position"{}}] = v.\mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}};}
+\DoxyCodeLine{40         j[\textcolor{stringliteral}{"{}normal"{}}] = v.\mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}};}
+\DoxyCodeLine{41         j[\textcolor{stringliteral}{"{}color"{}}] = v.\mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}};}
+\DoxyCodeLine{42         j[\textcolor{stringliteral}{"{}texcoord"{}}] = v.\mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}};}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacetigl_aa5f1be56c5cf94b3efb94b6866c08c8f}{from\_json}}(\textcolor{keyword}{const} \mbox{\hyperlink{classnlohmann_1_1basic__json}{nlohmann::json}}\& j, \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}}\& v) \{}
+\DoxyCodeLine{46         v.\mbox{\hyperlink{structtigl_1_1_vertex_aff55c1d3f1f661b005af7a8c9debc43b}{position}} = j[\textcolor{stringliteral}{"{}position"{}}];}
+\DoxyCodeLine{47         v.\mbox{\hyperlink{structtigl_1_1_vertex_abd97e5d99ce895968c2d8ad522a9b1c3}{normal}} = j[\textcolor{stringliteral}{"{}normal"{}}];}
+\DoxyCodeLine{48         v.\mbox{\hyperlink{structtigl_1_1_vertex_adc895a7b896a2339b923263cb0c21eec}{color}} = j[\textcolor{stringliteral}{"{}color"{}}];}
+\DoxyCodeLine{49         v.\mbox{\hyperlink{structtigl_1_1_vertex_a43f405cc0161f1ed902d844379257168}{texcoord}} = j[\textcolor{stringliteral}{"{}texcoord"{}}];}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51 \}}
+
+\end{DoxyCode}

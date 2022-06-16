@@ -1,0 +1,36 @@
+\hypertarget{util_8h_source}{}\doxysection{util.\+h}
+\mbox{\hyperlink{util_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{9 \textcolor{keyword}{inline} \textcolor{keywordtype}{float} \mbox{\hyperlink{util_8h_a2da545a42cba84823db00e394e72c7d7}{float\_mod}}(\textcolor{keywordtype}{float} value, \textcolor{keywordtype}{int} modulo) \{}
+\DoxyCodeLine{10     \textcolor{keywordtype}{int} tmpVal = (int)value;}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12     \textcolor{keywordtype}{int} mod = tmpVal \% modulo;}
+\DoxyCodeLine{13     \textcolor{keywordtype}{float} rest = value -\/ (float)tmpVal;}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15     \textcolor{keywordflow}{return} mod + rest;}
+\DoxyCodeLine{16 \}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{26 \textcolor{keyword}{inline} std::vector<std::string> \mbox{\hyperlink{util_8h_ace9ddc2afd9090bffbcf9d47f63c75a4}{splitString}}(std::string val, std::string delimiter) \{}
+\DoxyCodeLine{27     std::vector<std::string> vals;}
+\DoxyCodeLine{28     \textcolor{keywordflow}{if} (delimiter.empty()) \{}
+\DoxyCodeLine{29         vals.push\_back(val);}
+\DoxyCodeLine{30         \textcolor{keywordflow}{return} vals;}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32     \textcolor{keywordtype}{size\_t} pos = 0;}
+\DoxyCodeLine{33     std::string token;}
+\DoxyCodeLine{34     \textcolor{keywordflow}{while} ((pos = val.find(delimiter)) != std::string::npos) \{}
+\DoxyCodeLine{35         token = val.substr(0, pos);}
+\DoxyCodeLine{36         vals.push\_back(token);}
+\DoxyCodeLine{37         val.erase(0, pos + delimiter.length());}
+\DoxyCodeLine{38     \}}
+\DoxyCodeLine{39     \textcolor{keywordflow}{if}(!val.empty())}
+\DoxyCodeLine{40     vals.push\_back(val);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{keywordflow}{return} vals;}
+\DoxyCodeLine{43 \}}
+
+\end{DoxyCode}

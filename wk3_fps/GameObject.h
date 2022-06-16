@@ -20,6 +20,9 @@ protected:
 
 public:
 	GameObject() {window = WindowSingleton::getInstance().window;}
+	~GameObject() {
+		delete model;
+	}
 	/*GameObject(std::vector<tigl::Vertex> _vertexes) : vertexes(_vertexes) {}
 	GameObject(std::string& fileName) : model(new ObjModel(fileName)) { }*/
 	void draw();

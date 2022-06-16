@@ -1,5 +1,34 @@
-
-//#define STB_IMAGE_IMPLEMENTATION
+/////////
+//EISEN
+// De code gebruikt geen overbodige #defines en bevat geen magische constanten
+// 
+// De code bevat geen leaks van memory of andere resources
+// 
+// De code gebruikt een zinne wijze overerving en virtuele functies.
+// Zie GameObject.h en GameObject.cpp. Dit is de basis klasse.
+// MovableGameObject en SpinningGameObject erven hiervan over.
+// UML diagram staat in documentation/GameObject.png.
+// 
+// De code bevat een herbruikbaar onderdeel dat is gedocumenteerd is met Doxgyen
+// en getest is met een geautomatiseerde unit-test.
+// Er wordt gebruik gemaakt van de native unit test van visual studio.
+// Kijk naar util.h. Deze is compleet gedocumenteerd. De split_string methode
+// wordt constant gebruikt bij het inladen van een scene.
+// 
+// De code gebruikt waar mogelijk en ziggen STL algoritmen en containers.
+// Overal wordt er gebruik gemaakt van de vector container.
+// In ObjModel.cpp in de methode draw op regel 236 wordt er gebruik gemaakt
+// van het for each algoritme om door een map heen te gaan.
+// 
+// De applicatie leest gegevens in vanuit een tekst file naar in-memory data, 
+// volgens het factory pattern.
+// Dit wordt gedaan in SceneFactory. h/cpp en in GameObjectFactory. h/cpp.
+// Bij de scene factory wordt de naam van de scene meegegeven die vervolgens
+// wordt gebruikt het bestand van de scene in te lezen.
+// Deze data wordt vervolgens gebruikt om de GameObjects in te lezen die
+// allemaal in een los bestand staan in de folder met de scene naam.
+// 
+////////
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -77,6 +106,10 @@ int main(void)
         glfwPollEvents();
     }
     s.save(selectedScene, gameobjects);
+
+    for (GameObject* g : gameobjects) {
+        delete g;
+    }
 	glfwTerminate();
 
     return 0;
@@ -99,7 +132,6 @@ void init()
     camera = new FpsCam(window);
 
     tigl::shader->enableLighting(true);
-    //tigl::shader->enableColorMult(false);
     tigl::shader->setLightCount(1);
     tigl::shader->setLightDirectional(0, false);
     tigl::shader->enableFog(enableFog);
@@ -107,7 +139,6 @@ void init()
     tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });
     tigl::shader->setLightAmbient(0, { 0.5f, 0.5f, 0.5f });
  
-    
 }
 
 bool fogPressed = false;
@@ -121,7 +152,6 @@ void update(double deltatime)
     if (glfwGetKey(window, GLFW_KEY_F) == GLFW_RELEASE && fogPressed) {
         fogPressed = false;
     }
-
 
     camera->update(deltatime);   
 
@@ -146,13 +176,6 @@ void draw()
     
     tigl::shader->enableTexture(false);
     tigl::shader->enableLighting(true);
-    /*glm::mat4 mat = glm::mat4(1.0f);
-    mat = glm::translate(mat, { 1,0,0 });
-    tigl::shader->setModelMatrix(mat);
-    tigl::shader->setLightDirectional(0, true);
-    tigl::shader->setLightPosition(0, { 1,20,0 });
-    tigl::shader->setLightDiffuse(0, { 0.5f,0.5f,0.5f });*/
-   // createCube();
 
     for (auto& object : gameobjects) object->draw();
    
@@ -173,99 +196,6 @@ void createGround() {
     gameobjects.push_back(groundObject);
 
 }
-
-//void drawMap() {
-//    glBindTexture(GL_TEXTURE_2D, textureId);
-//    for (int x = 0; x < 20; x++)
-//    {
-//        for (int y = 0; y < 10; y++)
-//        {
-//            for (int z = 0; z < 20; z++)
-//            {
-//                glm::vec3 position(x,y -7.4,z);
-//                glm::mat4 mat(1.0f);
-//                mat = glm::scale(mat, glm::vec3(0.2f, 0.2f, 0.2f));
-//                mat = glm::translate(mat, position);
-//                
-//                tigl::shader->setModelMatrix(mat);
-//                drawCube(map[x][y][z]);
-//            }
-//        }
-//    }
-//}
-
-//void loadAtlas() {
-//    glGenTextures(1, &textureId);
-//    glBindTexture(GL_TEXTURE_2D, textureId);
-//    imgData = stbi_load("Atlas.png", &width, &height, &bpp, 4);
-//
-//    glTexImage2D(GL_TEXTURE_2D,
-//        0,
-//        GL_RGBA,
-//        width,
-//        height,
-//        0,
-//        GL_RGBA,
-//        GL_UNSIGNED_BYTE,
-//        imgData);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-//    stbi_image_free(imgData);
-//}
-
-//void drawCube(int index) {
-//    if (index < 0) return;
-//    int x = index % horizontalItems;
-//    int y = index / horizontalItems;
-//
-//    int atlasX = x * horizontalItems;
-//    int atlasY = y * verticalItems;
-//    int sizeX = width / horizontalItems;
-//    int sizeY = height / verticalItems;
-//    createCubeWithTexture(atlasX, atlasY, horizontalItems, verticalItems);
-//}
-
-//void createCubeWithTexture(int xb, int yb, int sizeX, int sizeY) {
-//
-//    // xb and yb = (0,0)
-//    glm::vec2 botL(xb / (double)width, yb / (double)height);
-//    glm::vec2 botR((xb + sizeX) / (double)width, yb / (double)height);
-//    glm::vec2 topL(xb / (double)width, (yb + sizeY) / (double)height);
-//    glm::vec2 topR((xb + sizeX) / (double)width, (yb + sizeY) / (double)height);
-//
-//    tigl::begin(GL_QUADS);
-//
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), botR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), botL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), topL, glm::vec4(0.0, 1.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), topR, glm::vec4(1.0, 1.0, 1.0, 1.0)));
-//
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), botR, glm::vec4(1.0, 0.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), botL, glm::vec4(0.0, 0.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-//
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), botR, glm::vec4(1.0, 1.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5),botL, glm::vec4(0.0, 1.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-//
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), botR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), botL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), topL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), topR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
-//
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, 0.5), botR, glm::vec4(0.0, 1.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, 0.5, -0.5), botL, glm::vec4(0.0, 1.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, -0.5), topL, glm::vec4(0.0, 0.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(-0.5, -0.5, 0.5), topR, glm::vec4(0.0, 0.0, 1.0, 1.0)));
-//
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, -0.5), botR, glm::vec4(1.0, 1.0, 0.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, 0.5, 0.5), botL, glm::vec4(1.0, 1.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, 0.5), topL, glm::vec4(1.0, 0.0, 1.0, 1.0)));
-//    tigl::addVertex(Vertex::PTC(glm::vec3(0.5, -0.5, -0.5), topR, glm::vec4(1.0, 0.0, 0.0, 1.0)));
-//    tigl::end();
-//}
 
 void createCube() {
     

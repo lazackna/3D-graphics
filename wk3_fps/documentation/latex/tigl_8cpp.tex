@@ -1,0 +1,50 @@
+\hypertarget{tigl_8cpp}{}\doxysection{tigl.\+cpp File Reference}
+\label{tigl_8cpp}\index{tigl.cpp@{tigl.cpp}}
+{\ttfamily \#include \char`\"{}tigl.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$glm/gtc/type\+\_\+ptr.\+hpp$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtigl_1_1_shader_impl}{tigl\+::\+Shader\+Impl}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacetigl}{tigl}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacetigl_a34cd5a3b10c746f9a79402424e4efd72}{tigl\+::init}} ()
+\item 
+void \mbox{\hyperlink{namespacetigl_a88d69aef8d0b0027ef30353fda3fb92c}{tigl\+::begin}} (GLenum shape)
+\item 
+void \mbox{\hyperlink{namespacetigl_af9fb069737ec4a2d6c1692e4ada3649b}{tigl\+::add\+Vertex}} (const Vertex \&vertex)
+\item 
+void \mbox{\hyperlink{namespacetigl_a9a4b35cebda0b7707380796a6c149cfc}{tigl\+::end}} ()
+\item 
+void \mbox{\hyperlink{namespacetigl_aa22bf60a6f9f7a5ce7dda206a1892f4e}{tigl\+::draw\+Vertices}} (GLenum shape, const std\+::vector$<$ Vertex $>$ \&vertices)
+\item 
+VBO $\ast$ \mbox{\hyperlink{namespacetigl_a5db9719226dc465fb422ee13b1b0a4f5}{tigl\+::create\+Vbo}} (const std\+::vector$<$ Vertex $>$ \&vertices)
+\item 
+void \mbox{\hyperlink{namespacetigl_a24062c16160f0e3ae944f7e847e6da5f}{tigl\+::draw\+Vertices}} (GLenum shape, VBO $\ast$vbo)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ internal\+::\+Shader $>$ \mbox{\hyperlink{namespacetigl_a73bd593223e98a3369b108c5ba71fb5f}{tigl\+::shader}}
+\item 
+int \mbox{\hyperlink{namespacetigl_a82406c9ff8322694ddddccfd9fae9bfc}{tigl\+::attribute\+Position}} = 0
+\item 
+int \mbox{\hyperlink{namespacetigl_a930839b7ad54fb03926d0374d20da9df}{tigl\+::attribute\+Color}} = 1
+\item 
+int \mbox{\hyperlink{namespacetigl_ae7eb8578ad67a2043de70a61624eb4ab}{tigl\+::attribute\+Texcoord}} = 2
+\item 
+int \mbox{\hyperlink{namespacetigl_a6022de11e4ad0fd2215a54813b157e86}{tigl\+::attribute\+Normal}} = 3
+\item 
+std\+::vector$<$ Vertex $>$ \mbox{\hyperlink{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}{tigl\+::vertices}}
+\item 
+GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{tigl\+::shape}} = 0
+\end{DoxyCompactItemize}

@@ -1,0 +1,241 @@
+\hypertarget{main_8cpp}{}\doxysection{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.cpp@{main.cpp}}
+{\ttfamily \#include $<$GL/glew.\+h$>$}\newline
+{\ttfamily \#include $<$GLFW/glfw3.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}tigl.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Fps\+Cam.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$glm/gtc/matrix\+\_\+transform.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}stb\+\_\+image.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Obj\+Model.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Window\+Singleton.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}UUIDGenerator\+Singleton.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Scene\+Manager.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}{init}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_abe84ff2ec9effc97d0630f150aaa8727}{update}} (double deltatime)
+\item 
+void \mbox{\hyperlink{main_8cpp_a56c5cf8a568cff737ff95520cbe6b405}{draw}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_afc6b9f4a25216ec36baa6e7518a7501a}{load\+Atlas}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ad60030f1d05e3deb6f57741003d2ed20}{draw\+Cube}} (int index)
+\item 
+void \mbox{\hyperlink{main_8cpp_ac1c42996dc041e89ab4b59a1611d98c4}{create\+Cube}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_a39d8752b7da77b29ef2f3ac2d0d2f717}{create\+Ground}} ()
+\item 
+void \mbox{\hyperlink{main_8cpp_ad94b44a36b608fe340a061bedc63c1ea}{create\+Cube\+With\+Texture}} (int xb, int yb, int sizeX, int sizeY)
+\item 
+void \mbox{\hyperlink{main_8cpp_a96caf04720f8cb5a892715f4b48ee85d}{rotate\+Degrees}} (glm\+::mat4 \&\mbox{\hyperlink{main_8cpp_a04166d20812cae34c1f1e622ac0506d5}{model}}, const \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm\+::vec3}} rotation)
+\item 
+int \mbox{\hyperlink{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{main_8cpp_a3206cb12c6308c4ee8f6a4753aa535d1}{selected\+Scene}} = \char`\"{}test2\char`\"{}
+\item 
+GLFWwindow $\ast$ \mbox{\hyperlink{main_8cpp_a80de27bd7dc4e2b2ad3d5895b97a70f0}{window}}
+\item 
+\mbox{\hyperlink{class_obj_model}{Obj\+Model}} $\ast$ \mbox{\hyperlink{main_8cpp_a04166d20812cae34c1f1e622ac0506d5}{model}}
+\item 
+int \mbox{\hyperlink{main_8cpp_a2474a5474cbff19523a51eb1de01cda4}{width}}
+\item 
+int \mbox{\hyperlink{main_8cpp_ad12fc34ce789bce6c8a05d8a17138534}{height}}
+\item 
+int \mbox{\hyperlink{main_8cpp_a00731ab471a2b38632427d0d80a82278}{bpp}}
+\item 
+int \mbox{\hyperlink{main_8cpp_aef2196b4f08cb76bb973b33fe0231954}{map\+Width}}
+\item 
+int \mbox{\hyperlink{main_8cpp_ab827f45f28538efb36032becc96b0734}{map\+Height}}
+\item 
+int \mbox{\hyperlink{main_8cpp_a93afe1d4f7d032b531cfdcef56ede01b}{mapbpp}}
+\item 
+GLuint \mbox{\hyperlink{main_8cpp_a748ff5115c8b3b65daec06945c822353}{texture\+Id}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$ $>$ \mbox{\hyperlink{main_8cpp_a42b5f547e8cb0b39efe775d733266e6c}{gameobjects}}
+\item 
+bool \mbox{\hyperlink{main_8cpp_aa645afdc71ac990ff755c7958dd292d7}{enable\+Fog}} = false
+\item 
+double \mbox{\hyperlink{main_8cpp_a9648c4b3c5e8528ebc2745f7cb76ff62}{last\+Time}}
+\item 
+double \mbox{\hyperlink{main_8cpp_afac460bb6131314e58628ebd514f53c7}{delta\+Time}}
+\item 
+int \mbox{\hyperlink{main_8cpp_a5d1e43d0e11429a74bf4ad3f07d0e254}{map}} \mbox{[}20\mbox{]}\mbox{[}10\mbox{]}\mbox{[}20\mbox{]}
+\item 
+\mbox{\hyperlink{class_fps_cam}{Fps\+Cam}} $\ast$ \mbox{\hyperlink{main_8cpp_a1208b65e15dff3eca81ea776f67d78b9}{camera}}
+\item 
+bool \mbox{\hyperlink{main_8cpp_a8c6ff45c3394b9b67dc2d38e1644cf49}{fog\+Pressed}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{main_8cpp_ac1c42996dc041e89ab4b59a1611d98c4}\label{main_8cpp_ac1c42996dc041e89ab4b59a1611d98c4}} 
+\index{main.cpp@{main.cpp}!createCube@{createCube}}
+\index{createCube@{createCube}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{createCube()}{createCube()}}
+{\footnotesize\ttfamily void create\+Cube (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_ad94b44a36b608fe340a061bedc63c1ea}\label{main_8cpp_ad94b44a36b608fe340a061bedc63c1ea}} 
+\index{main.cpp@{main.cpp}!createCubeWithTexture@{createCubeWithTexture}}
+\index{createCubeWithTexture@{createCubeWithTexture}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{createCubeWithTexture()}{createCubeWithTexture()}}
+{\footnotesize\ttfamily void create\+Cube\+With\+Texture (\begin{DoxyParamCaption}\item[{int}]{xb,  }\item[{int}]{yb,  }\item[{int}]{sizeX,  }\item[{int}]{sizeY }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a39d8752b7da77b29ef2f3ac2d0d2f717}\label{main_8cpp_a39d8752b7da77b29ef2f3ac2d0d2f717}} 
+\index{main.cpp@{main.cpp}!createGround@{createGround}}
+\index{createGround@{createGround}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{createGround()}{createGround()}}
+{\footnotesize\ttfamily void create\+Ground (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a56c5cf8a568cff737ff95520cbe6b405}\label{main_8cpp_a56c5cf8a568cff737ff95520cbe6b405}} 
+\index{main.cpp@{main.cpp}!draw@{draw}}
+\index{draw@{draw}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_ad60030f1d05e3deb6f57741003d2ed20}\label{main_8cpp_ad60030f1d05e3deb6f57741003d2ed20}} 
+\index{main.cpp@{main.cpp}!drawCube@{drawCube}}
+\index{drawCube@{drawCube}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{drawCube()}{drawCube()}}
+{\footnotesize\ttfamily void draw\+Cube (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}\label{main_8cpp_a02fd73d861ef2e4aabb38c0c9ff82947}} 
+\index{main.cpp@{main.cpp}!init@{init}}
+\index{init@{init}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_afc6b9f4a25216ec36baa6e7518a7501a}\label{main_8cpp_afc6b9f4a25216ec36baa6e7518a7501a}} 
+\index{main.cpp@{main.cpp}!loadAtlas@{loadAtlas}}
+\index{loadAtlas@{loadAtlas}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{loadAtlas()}{loadAtlas()}}
+{\footnotesize\ttfamily void load\+Atlas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}\label{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_a96caf04720f8cb5a892715f4b48ee85d}\label{main_8cpp_a96caf04720f8cb5a892715f4b48ee85d}} 
+\index{main.cpp@{main.cpp}!rotateDegrees@{rotateDegrees}}
+\index{rotateDegrees@{rotateDegrees}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{rotateDegrees()}{rotateDegrees()}}
+{\footnotesize\ttfamily void rotate\+Degrees (\begin{DoxyParamCaption}\item[{glm\+::mat4 \&}]{model,  }\item[{const \mbox{\hyperlink{_serialization_enabler_8h_a7274656e89c300ce226b118ab53fa84d}{glm\+::vec3}}}]{rotation }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{main_8cpp_abe84ff2ec9effc97d0630f150aaa8727}\label{main_8cpp_abe84ff2ec9effc97d0630f150aaa8727}} 
+\index{main.cpp@{main.cpp}!update@{update}}
+\index{update@{update}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void update (\begin{DoxyParamCaption}\item[{double}]{deltatime }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{main_8cpp_a00731ab471a2b38632427d0d80a82278}\label{main_8cpp_a00731ab471a2b38632427d0d80a82278}} 
+\index{main.cpp@{main.cpp}!bpp@{bpp}}
+\index{bpp@{bpp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{bpp}{bpp}}
+{\footnotesize\ttfamily int bpp}
+
+\mbox{\Hypertarget{main_8cpp_a1208b65e15dff3eca81ea776f67d78b9}\label{main_8cpp_a1208b65e15dff3eca81ea776f67d78b9}} 
+\index{main.cpp@{main.cpp}!camera@{camera}}
+\index{camera@{camera}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_fps_cam}{Fps\+Cam}}$\ast$ camera}
+
+\mbox{\Hypertarget{main_8cpp_afac460bb6131314e58628ebd514f53c7}\label{main_8cpp_afac460bb6131314e58628ebd514f53c7}} 
+\index{main.cpp@{main.cpp}!deltaTime@{deltaTime}}
+\index{deltaTime@{deltaTime}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{deltaTime}{deltaTime}}
+{\footnotesize\ttfamily double delta\+Time}
+
+\mbox{\Hypertarget{main_8cpp_aa645afdc71ac990ff755c7958dd292d7}\label{main_8cpp_aa645afdc71ac990ff755c7958dd292d7}} 
+\index{main.cpp@{main.cpp}!enableFog@{enableFog}}
+\index{enableFog@{enableFog}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{enableFog}{enableFog}}
+{\footnotesize\ttfamily bool enable\+Fog = false}
+
+\mbox{\Hypertarget{main_8cpp_a8c6ff45c3394b9b67dc2d38e1644cf49}\label{main_8cpp_a8c6ff45c3394b9b67dc2d38e1644cf49}} 
+\index{main.cpp@{main.cpp}!fogPressed@{fogPressed}}
+\index{fogPressed@{fogPressed}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{fogPressed}{fogPressed}}
+{\footnotesize\ttfamily bool fog\+Pressed = false}
+
+\mbox{\Hypertarget{main_8cpp_a42b5f547e8cb0b39efe775d733266e6c}\label{main_8cpp_a42b5f547e8cb0b39efe775d733266e6c}} 
+\index{main.cpp@{main.cpp}!gameobjects@{gameobjects}}
+\index{gameobjects@{gameobjects}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{gameobjects}{gameobjects}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_game_object}{Game\+Object}}$\ast$$>$ gameobjects}
+
+\mbox{\Hypertarget{main_8cpp_ad12fc34ce789bce6c8a05d8a17138534}\label{main_8cpp_ad12fc34ce789bce6c8a05d8a17138534}} 
+\index{main.cpp@{main.cpp}!height@{height}}
+\index{height@{height}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{height}{height}}
+{\footnotesize\ttfamily int height}
+
+\mbox{\Hypertarget{main_8cpp_a9648c4b3c5e8528ebc2745f7cb76ff62}\label{main_8cpp_a9648c4b3c5e8528ebc2745f7cb76ff62}} 
+\index{main.cpp@{main.cpp}!lastTime@{lastTime}}
+\index{lastTime@{lastTime}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{lastTime}{lastTime}}
+{\footnotesize\ttfamily double last\+Time}
+
+\mbox{\Hypertarget{main_8cpp_a5d1e43d0e11429a74bf4ad3f07d0e254}\label{main_8cpp_a5d1e43d0e11429a74bf4ad3f07d0e254}} 
+\index{main.cpp@{main.cpp}!map@{map}}
+\index{map@{map}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{map}{map}}
+{\footnotesize\ttfamily int map\mbox{[}20\mbox{]}\mbox{[}10\mbox{]}\mbox{[}20\mbox{]}}
+
+\mbox{\Hypertarget{main_8cpp_a93afe1d4f7d032b531cfdcef56ede01b}\label{main_8cpp_a93afe1d4f7d032b531cfdcef56ede01b}} 
+\index{main.cpp@{main.cpp}!mapbpp@{mapbpp}}
+\index{mapbpp@{mapbpp}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mapbpp}{mapbpp}}
+{\footnotesize\ttfamily int mapbpp}
+
+\mbox{\Hypertarget{main_8cpp_ab827f45f28538efb36032becc96b0734}\label{main_8cpp_ab827f45f28538efb36032becc96b0734}} 
+\index{main.cpp@{main.cpp}!mapHeight@{mapHeight}}
+\index{mapHeight@{mapHeight}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mapHeight}{mapHeight}}
+{\footnotesize\ttfamily int map\+Height}
+
+\mbox{\Hypertarget{main_8cpp_aef2196b4f08cb76bb973b33fe0231954}\label{main_8cpp_aef2196b4f08cb76bb973b33fe0231954}} 
+\index{main.cpp@{main.cpp}!mapWidth@{mapWidth}}
+\index{mapWidth@{mapWidth}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{mapWidth}{mapWidth}}
+{\footnotesize\ttfamily int map\+Width}
+
+\mbox{\Hypertarget{main_8cpp_a04166d20812cae34c1f1e622ac0506d5}\label{main_8cpp_a04166d20812cae34c1f1e622ac0506d5}} 
+\index{main.cpp@{main.cpp}!model@{model}}
+\index{model@{model}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_obj_model}{Obj\+Model}}$\ast$ model}
+
+\mbox{\Hypertarget{main_8cpp_a3206cb12c6308c4ee8f6a4753aa535d1}\label{main_8cpp_a3206cb12c6308c4ee8f6a4753aa535d1}} 
+\index{main.cpp@{main.cpp}!selectedScene@{selectedScene}}
+\index{selectedScene@{selectedScene}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{selectedScene}{selectedScene}}
+{\footnotesize\ttfamily const std\+::string selected\+Scene = \char`\"{}test2\char`\"{}}
+
+\mbox{\Hypertarget{main_8cpp_a748ff5115c8b3b65daec06945c822353}\label{main_8cpp_a748ff5115c8b3b65daec06945c822353}} 
+\index{main.cpp@{main.cpp}!textureId@{textureId}}
+\index{textureId@{textureId}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{textureId}{textureId}}
+{\footnotesize\ttfamily GLuint texture\+Id}
+
+\mbox{\Hypertarget{main_8cpp_a2474a5474cbff19523a51eb1de01cda4}\label{main_8cpp_a2474a5474cbff19523a51eb1de01cda4}} 
+\index{main.cpp@{main.cpp}!width@{width}}
+\index{width@{width}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{width}{width}}
+{\footnotesize\ttfamily int width}
+
+\mbox{\Hypertarget{main_8cpp_a80de27bd7dc4e2b2ad3d5895b97a70f0}\label{main_8cpp_a80de27bd7dc4e2b2ad3d5895b97a70f0}} 
+\index{main.cpp@{main.cpp}!window@{window}}
+\index{window@{window}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily GLFWwindow$\ast$ window}
+

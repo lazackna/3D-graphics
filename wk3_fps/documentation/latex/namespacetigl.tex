@@ -1,0 +1,156 @@
+\hypertarget{namespacetigl}{}\doxysection{tigl Namespace Reference}
+\label{namespacetigl}\index{tigl@{tigl}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacetigl_1_1internal}{internal}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtigl_1_1_shader_impl}{Shader\+Impl}}
+\item 
+class \mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}}
+\item 
+struct \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacetigl_ab4a747056fc57e82cd30c8b285dd3626}{to\+\_\+json}} (\mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann\+::json}} \&j, const \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \&v)
+\item 
+void \mbox{\hyperlink{namespacetigl_aa5f1be56c5cf94b3efb94b6866c08c8f}{from\+\_\+json}} (const \mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann\+::json}} \&j, \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \&v)
+\item 
+void \mbox{\hyperlink{namespacetigl_a34cd5a3b10c746f9a79402424e4efd72}{init}} ()
+\item 
+void \mbox{\hyperlink{namespacetigl_a88d69aef8d0b0027ef30353fda3fb92c}{begin}} (GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}})
+\item 
+void \mbox{\hyperlink{namespacetigl_af9fb069737ec4a2d6c1692e4ada3649b}{add\+Vertex}} (const \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \&vertex)
+\item 
+void \mbox{\hyperlink{namespacetigl_a9a4b35cebda0b7707380796a6c149cfc}{end}} ()
+\item 
+void \mbox{\hyperlink{namespacetigl_aa22bf60a6f9f7a5ce7dda206a1892f4e}{draw\+Vertices}} (GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}}, const std\+::vector$<$ \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} $>$ \&\mbox{\hyperlink{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}{vertices}})
+\item 
+\mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}} $\ast$ \mbox{\hyperlink{namespacetigl_a5db9719226dc465fb422ee13b1b0a4f5}{create\+Vbo}} (const std\+::vector$<$ \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} $>$ \&\mbox{\hyperlink{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}{vertices}})
+\item 
+void \mbox{\hyperlink{namespacetigl_a24062c16160f0e3ae944f7e847e6da5f}{draw\+Vertices}} (GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}}, \mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}} $\ast$vbo)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classtigl_1_1internal_1_1_shader}{internal\+::\+Shader}} $>$ \mbox{\hyperlink{namespacetigl_a73bd593223e98a3369b108c5ba71fb5f}{shader}}
+\item 
+int \mbox{\hyperlink{namespacetigl_a82406c9ff8322694ddddccfd9fae9bfc}{attribute\+Position}} = 0
+\item 
+int \mbox{\hyperlink{namespacetigl_a930839b7ad54fb03926d0374d20da9df}{attribute\+Color}} = 1
+\item 
+int \mbox{\hyperlink{namespacetigl_ae7eb8578ad67a2043de70a61624eb4ab}{attribute\+Texcoord}} = 2
+\item 
+int \mbox{\hyperlink{namespacetigl_a6022de11e4ad0fd2215a54813b157e86}{attribute\+Normal}} = 3
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} $>$ \mbox{\hyperlink{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}{vertices}}
+\item 
+GLenum \mbox{\hyperlink{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}{shape}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacetigl_af9fb069737ec4a2d6c1692e4ada3649b}\label{namespacetigl_af9fb069737ec4a2d6c1692e4ada3649b}} 
+\index{tigl@{tigl}!addVertex@{addVertex}}
+\index{addVertex@{addVertex}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{addVertex()}{addVertex()}}
+{\footnotesize\ttfamily void tigl\+::add\+Vertex (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \&}]{vertex }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_a88d69aef8d0b0027ef30353fda3fb92c}\label{namespacetigl_a88d69aef8d0b0027ef30353fda3fb92c}} 
+\index{tigl@{tigl}!begin@{begin}}
+\index{begin@{begin}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily void tigl\+::begin (\begin{DoxyParamCaption}\item[{GLenum}]{shape }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_a5db9719226dc465fb422ee13b1b0a4f5}\label{namespacetigl_a5db9719226dc465fb422ee13b1b0a4f5}} 
+\index{tigl@{tigl}!createVbo@{createVbo}}
+\index{createVbo@{createVbo}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{createVbo()}{createVbo()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}} $\ast$ tigl\+::create\+Vbo (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} $>$ \&}]{vertices }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_aa22bf60a6f9f7a5ce7dda206a1892f4e}\label{namespacetigl_aa22bf60a6f9f7a5ce7dda206a1892f4e}} 
+\index{tigl@{tigl}!drawVertices@{drawVertices}}
+\index{drawVertices@{drawVertices}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{drawVertices()}{drawVertices()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void tigl\+::draw\+Vertices (\begin{DoxyParamCaption}\item[{GLenum}]{shape,  }\item[{const std\+::vector$<$ \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} $>$ \&}]{vertices }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_a24062c16160f0e3ae944f7e847e6da5f}\label{namespacetigl_a24062c16160f0e3ae944f7e847e6da5f}} 
+\index{tigl@{tigl}!drawVertices@{drawVertices}}
+\index{drawVertices@{drawVertices}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{drawVertices()}{drawVertices()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void tigl\+::draw\+Vertices (\begin{DoxyParamCaption}\item[{GLenum}]{shape,  }\item[{\mbox{\hyperlink{classtigl_1_1_v_b_o}{VBO}} $\ast$}]{vbo }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_a9a4b35cebda0b7707380796a6c149cfc}\label{namespacetigl_a9a4b35cebda0b7707380796a6c149cfc}} 
+\index{tigl@{tigl}!end@{end}}
+\index{end@{end}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily void tigl\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_aa5f1be56c5cf94b3efb94b6866c08c8f}\label{namespacetigl_aa5f1be56c5cf94b3efb94b6866c08c8f}} 
+\index{tigl@{tigl}!from\_json@{from\_json}}
+\index{from\_json@{from\_json}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{from\_json()}{from\_json()}}
+{\footnotesize\ttfamily void tigl\+::from\+\_\+json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann\+::json}} \&}]{j,  }\item[{\mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \&}]{v }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_a34cd5a3b10c746f9a79402424e4efd72}\label{namespacetigl_a34cd5a3b10c746f9a79402424e4efd72}} 
+\index{tigl@{tigl}!init@{init}}
+\index{init@{init}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void tigl\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacetigl_ab4a747056fc57e82cd30c8b285dd3626}\label{namespacetigl_ab4a747056fc57e82cd30c8b285dd3626}} 
+\index{tigl@{tigl}!to\_json@{to\_json}}
+\index{to\_json@{to\_json}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{to\_json()}{to\_json()}}
+{\footnotesize\ttfamily void tigl\+::to\+\_\+json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacenlohmann_a2bfd99e845a2e5cd90aeaf1b1431f474}{nlohmann\+::json}} \&}]{j,  }\item[{const \mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}} \&}]{v }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacetigl_a930839b7ad54fb03926d0374d20da9df}\label{namespacetigl_a930839b7ad54fb03926d0374d20da9df}} 
+\index{tigl@{tigl}!attributeColor@{attributeColor}}
+\index{attributeColor@{attributeColor}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{attributeColor}{attributeColor}}
+{\footnotesize\ttfamily int tigl\+::attribute\+Color = 1}
+
+\mbox{\Hypertarget{namespacetigl_a6022de11e4ad0fd2215a54813b157e86}\label{namespacetigl_a6022de11e4ad0fd2215a54813b157e86}} 
+\index{tigl@{tigl}!attributeNormal@{attributeNormal}}
+\index{attributeNormal@{attributeNormal}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{attributeNormal}{attributeNormal}}
+{\footnotesize\ttfamily int tigl\+::attribute\+Normal = 3}
+
+\mbox{\Hypertarget{namespacetigl_a82406c9ff8322694ddddccfd9fae9bfc}\label{namespacetigl_a82406c9ff8322694ddddccfd9fae9bfc}} 
+\index{tigl@{tigl}!attributePosition@{attributePosition}}
+\index{attributePosition@{attributePosition}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{attributePosition}{attributePosition}}
+{\footnotesize\ttfamily int tigl\+::attribute\+Position = 0}
+
+\mbox{\Hypertarget{namespacetigl_ae7eb8578ad67a2043de70a61624eb4ab}\label{namespacetigl_ae7eb8578ad67a2043de70a61624eb4ab}} 
+\index{tigl@{tigl}!attributeTexcoord@{attributeTexcoord}}
+\index{attributeTexcoord@{attributeTexcoord}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{attributeTexcoord}{attributeTexcoord}}
+{\footnotesize\ttfamily int tigl\+::attribute\+Texcoord = 2}
+
+\mbox{\Hypertarget{namespacetigl_a73bd593223e98a3369b108c5ba71fb5f}\label{namespacetigl_a73bd593223e98a3369b108c5ba71fb5f}} 
+\index{tigl@{tigl}!shader@{shader}}
+\index{shader@{shader}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{shader}{shader}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classtigl_1_1internal_1_1_shader}{internal\+::\+Shader}} $>$ tigl\+::shader}
+
+\mbox{\Hypertarget{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}\label{namespacetigl_a7697ecdfd78fdec0879600f81cad9b6e}} 
+\index{tigl@{tigl}!shape@{shape}}
+\index{shape@{shape}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{shape}{shape}}
+{\footnotesize\ttfamily GLenum tigl\+::shape = 0}
+
+\mbox{\Hypertarget{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}\label{namespacetigl_ae0dd81d61d7dba149ed62ace1c7a1ccf}} 
+\index{tigl@{tigl}!vertices@{vertices}}
+\index{vertices@{vertices}!tigl@{tigl}}
+\doxysubsubsection{\texorpdfstring{vertices}{vertices}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structtigl_1_1_vertex}{Vertex}}$>$ tigl\+::vertices}
+

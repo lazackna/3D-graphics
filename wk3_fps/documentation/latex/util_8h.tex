@@ -1,0 +1,60 @@
+\hypertarget{util_8h}{}\doxysection{util.\+h File Reference}
+\label{util_8h}\index{util.h@{util.h}}
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{util_8h_a2da545a42cba84823db00e394e72c7d7}{float\+\_\+mod}} (float value, int modulo)
+\begin{DoxyCompactList}\small\item\em Used to calculate modulo of a float with the remaining decimals returned as well. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{util_8h_ace9ddc2afd9090bffbcf9d47f63c75a4}{split\+String}} (std\+::string val, std\+::string delimiter)
+\begin{DoxyCompactList}\small\item\em Used to split a string into a vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{util_8h_a2da545a42cba84823db00e394e72c7d7}\label{util_8h_a2da545a42cba84823db00e394e72c7d7}} 
+\index{util.h@{util.h}!float\_mod@{float\_mod}}
+\index{float\_mod@{float\_mod}!util.h@{util.h}}
+\doxysubsubsection{\texorpdfstring{float\_mod()}{float\_mod()}}
+{\footnotesize\ttfamily float float\+\_\+mod (\begin{DoxyParamCaption}\item[{float}]{value,  }\item[{int}]{modulo }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Used to calculate modulo of a float with the remaining decimals returned as well. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+Is the value that needs to be modulo\textquotesingle{}d 
+\begin{DoxyParams}{Parameters}
+{\em modulo} & \\
+\hline
+\end{DoxyParams}
+Is the modulo factor. \begin{DoxyReturn}{Returns}
+A float modulo. This will have the remaining decimal numbers as well.
+\end{DoxyReturn}
+\mbox{\Hypertarget{util_8h_ace9ddc2afd9090bffbcf9d47f63c75a4}\label{util_8h_ace9ddc2afd9090bffbcf9d47f63c75a4}} 
+\index{util.h@{util.h}!splitString@{splitString}}
+\index{splitString@{splitString}!util.h@{util.h}}
+\doxysubsubsection{\texorpdfstring{splitString()}{splitString()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ split\+String (\begin{DoxyParamCaption}\item[{std\+::string}]{val,  }\item[{std\+::string}]{delimiter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Used to split a string into a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & \\
+\hline
+\end{DoxyParams}
+The value that needs to be split. 
+\begin{DoxyParams}{Parameters}
+{\em delimiter} & \\
+\hline
+\end{DoxyParams}
+The value on which val must be split. \begin{DoxyReturn}{Returns}
+A vector of type string
+\end{DoxyReturn}
