@@ -20,6 +20,7 @@ void GameObject::draw() {
 		model->draw(); 
 	}
 	else { 
+		tigl::shader->enableTexture(false);
 		tigl::drawVertices(GL_TRIANGLES, vertexes); 
 	}
 }

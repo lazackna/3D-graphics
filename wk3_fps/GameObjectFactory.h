@@ -8,6 +8,7 @@ class GameObject;
 class GameObjectFactory
 {
 public:
+	
 	/// <summary>
 	/// Used to create a gameobject through a file.
 	/// </summary>

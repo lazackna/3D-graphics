@@ -4,3 +4,7 @@ UUID:1
 Type:MovableGameObject
 UUID:2
 Type:SpinningGameObject
+UUID:3
+Type:GameObject
+UUID:4
+Type:GameObject
